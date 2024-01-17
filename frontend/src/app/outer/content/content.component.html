@@ -1,0 +1,23 @@
+<app-header [pageTitle] = "'On The Spot Challenge'" [logoSrc]="'assets/images/logo.png'" 
+(homeEvent)="showComponent('welcome')"
+(featuresEvent)="showComponent('features')"
+(aboutEvent)="showComponent('about')"/>
+
+<div>
+
+  <app-welcome-content *ngIf="componentToShow == 'welcome'" 
+  (loginEvent)="showComponent('login')"
+  />
+
+  <features-content *ngIf="componentToShow == 'features'"></features-content>
+
+  <about-content *ngIf="componentToShow == 'about'"></about-content>
+	
+  <app-login-form *ngIf="componentToShow == 'login'" 
+    (onSubmitLoginEvent)="onLogin($event)" 
+    (onSubmitRegisterEvent)="onRegister($event)"
+  />
+
+  <button-logout></button-logout>
+
+</div>

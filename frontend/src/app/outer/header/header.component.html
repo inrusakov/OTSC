@@ -1,0 +1,14 @@
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a routerLink="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+        <img src={{logoSrc}} class="bi me-2" width="40" height="32"/>
+        <span class="fs-4">On The Spot Challenge</span>
+      </a>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item btn btn-outline me-2"><a (click)="homeEvent.emit()" class="nav-link" aria-current="page">Home</a></li>
+        <li class="nav-item btn btn-outline me-2"><a (click)="featuresEvent.emit()" class="nav-link">Features</a></li>
+        <li class="nav-item btn btn-outline me-2"><a (click)="aboutEvent.emit()" class="nav-link">About</a></li>
+      </ul>
+    </header>
+</div>
