@@ -1,4 +1,4 @@
-import { EventEmitter, Component, Output } from '@angular/core';
+import { EventEmitter, Component, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'app-login-form',
@@ -9,6 +9,7 @@ export class LoginFormComponent {
 
   @Output() onSubmitLoginEvent = new EventEmitter();
   @Output() onSubmitRegisterEvent = new EventEmitter();
+  @Output() onHideAlert = new EventEmitter();
 
 	active: string = "login";
   firstName: string = "";
@@ -17,11 +18,13 @@ export class LoginFormComponent {
   password: string = "";
 
 	onLoginTab(): void {
-		this.active = "login";
+		this.active = "login"
+    this.onHideAlert.emit();
 	}
 
 	onRegisterTab(): void {
 		this.active = "register";
+    this.onHideAlert.emit();
 	}
 
   onSubmitLogin(): void {

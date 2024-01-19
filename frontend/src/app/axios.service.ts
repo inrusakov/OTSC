@@ -11,6 +11,10 @@ export class AxiosService {
     axios.defaults.headers.post['Content-Type'] = 'application/json';
   }
 
+  checkAuth(): boolean{
+    return window.localStorage.getItem("auth_token") === null ? false : true;
+  }
+
   getAuthToken(): string | null {
     return window.localStorage.getItem("auth_token");
   }

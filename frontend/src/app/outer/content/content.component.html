@@ -5,8 +5,12 @@
 
 <div>
 
+  <div *ngIf="alert == 'active'" class="alert alert-danger form-content row justify-content-center" role="alert">
+    Wrong Credentials!
+  </div>
+
   <app-welcome-content *ngIf="componentToShow == 'welcome'" 
-  (loginEvent)="showComponent('login')"
+  (loginEvent)="proceedToApp()"
   />
 
   <features-content *ngIf="componentToShow == 'features'"></features-content>
@@ -16,8 +20,7 @@
   <app-login-form *ngIf="componentToShow == 'login'" 
     (onSubmitLoginEvent)="onLogin($event)" 
     (onSubmitRegisterEvent)="onRegister($event)"
+    (onHideAlert)="hideAlert()"
   />
-
-  <button-logout></button-logout>
 
 </div>

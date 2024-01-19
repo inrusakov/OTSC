@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AxiosService } from '../../axios.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'inner-app',
@@ -9,51 +10,16 @@ import { AxiosService } from '../../axios.service';
 export class InnerAppComponent {
 	componentToShow: string = "welcome";
 
-	constructor(private axiosService: AxiosService) { }
+	constructor(private axiosService: AxiosService, private router: Router) { }
 
 	showComponent(componentToShow: string): void {
     this.componentToShow = componentToShow;
   }
 
-	onLogin(input: any): void {
-		this.axiosService.request(
-		    "POST",
-		    "/login",
-		    {
-		        login: input.login,
-		        password: input.password
-		    }).then(
-		    response => {
-		        this.axiosService.setAuthToken(response.data.token);
-		        this.componentToShow = "messages";
-		    }).catch(
-		    error => {
-		        this.axiosService.setAuthToken(null);
-		        this.componentToShow = "welcome";
-		    }
-		);
-
+  ngOnInit(): void {
+    if (!this.axiosService.checkAuth()){
+		this.router.navigate(['/']);
 	}
-
-	onRegister(input: any): void {
-		this.axiosService.request(
-		    "POST",
-		    "/register",
-		    {
-		        firstName: input.firstName,
-		        lastName: input.lastName,
-		        login: input.login,
-		        password: input.password
-		    }).then(
-		    response => {
-		        this.axiosService.setAuthToken(response.data.token);
-		        this.componentToShow = "messages";
-		    }).catch(
-		    error => {
-		        this.axiosService.setAuthToken(null);
-		        this.componentToShow = "welcome";
-		    }
-		);
-	}
+  }
 
 }
