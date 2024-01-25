@@ -8,7 +8,6 @@ import com.otsc.backend.services.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,7 +38,7 @@ public class AuthController {
     }
 
     @GetMapping("/checkAuth")
-    public ResponseEntity<String> check(){
+    public ResponseEntity<String> check() {
         return new ResponseEntity<>("Your Auth is OK", HttpStatus.OK);
     }
 

@@ -2,7 +2,7 @@ package com.otsc.backend.mappers;
 
 import com.otsc.backend.dtos.SignUpDto;
 import com.otsc.backend.dtos.UserDto;
-import com.otsc.backend.entites.User;
+import com.otsc.backend.entities.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
