@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BetRepository extends JpaRepository<Bet, Long> {
+    Optional<Bet> findBetById(Long id);
+
     Optional<List<Bet>> findBetsByCreator(Long creator);
 
     Optional<List<Bet>> findBetsByOpponent(Long opponent);

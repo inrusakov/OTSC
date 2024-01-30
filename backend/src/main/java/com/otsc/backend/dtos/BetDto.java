@@ -19,4 +19,5 @@ public class BetDto {
     private Long judge;
     private Long winner;
     private LocalDate date;
+    private String description;
 }

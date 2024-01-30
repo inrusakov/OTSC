@@ -26,23 +26,24 @@ public class Bet {
     private Long id;
 
     @Column(name = "creator", nullable = false)
-    @Size(max = 100)
     private Long creator;
 
+    @Column(name = "title", columnDefinition = "TEXT", nullable = false)
+    private String title;
+
+    @Column(name = "description", columnDefinition = "TEXT", nullable = false)
+    private String description;
+
+    @Column(name = "date", columnDefinition = "DATE")
+    private LocalDate date;
+
     @Column(name = "opponent")
-    @Size(max = 100)
     private Long opponent;
 
     @Column(name = "judge")
-    @Size(max = 100)
     private Long judge;
 
     @Column(name = "winner")
-    @Size(max = 100)
     private Long winner;
-
-    @Column(name = "date", columnDefinition = "DATE")
-    @Size(max = 100)
-    private LocalDate date;
 
 }
