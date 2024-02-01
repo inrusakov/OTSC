@@ -18,6 +18,8 @@ import { ButtonLogout } from './inner/button-logout/button-logout.component';
 import { InnerAppComponent } from './inner/inner-app/inner-app.component'; 
 
 import { AxiosService } from './axios.service';
+import { InnerHeaderComponent } from './inner/inner-header/inner-header.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -29,12 +31,14 @@ import { AxiosService } from './axios.service';
     FeaturesComponent,
     AboutComponent,
     ContentComponent,
-    InnerAppComponent
+    InnerAppComponent,
+    InnerHeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [AxiosService, provideRouter(routes)],
   bootstrap: [AppComponent]

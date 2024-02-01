@@ -1,0 +1,18 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-body-tertiary">
+	<div class="container-fluid">
+		<span class="navbar-brand">Dropdowns in navbar</span>
+
+		<div class="navbar" id="navbarContent">
+			<ul class="navbar-nav ms-auto">
+				<li class="nav-item" ngbDropdown display="dynamic" placement="bottom-end">
+					<a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown3" role="button"> Dynamic </a>
+					<div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
+						<a ngbDropdownItem href="#" (click)="$event.preventDefault()">Action</a>
+						<a ngbDropdownItem href="#" (click)="$event.preventDefault()">Another action</a>
+						<a ngbDropdownItem href="#" (click)="$event.preventDefault()">Something else here</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
