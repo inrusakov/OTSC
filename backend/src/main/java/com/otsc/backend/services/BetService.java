@@ -23,59 +23,90 @@ public class BetService {
 
     private final BetMapper betMapper;
 
-    public void createBet(BetDto betDto, Long creatorId) {
+    public BetDto createBet(BetDto betDto, Long creatorId) {
         //TODO: Not final
 
         betDto.setCreator(creatorId);
         Bet bet = betMapper.betDtoToBet(betDto);
 
         betRepository.save(bet);
+        return betMapper.toBetDto(bet);
     }
 
-    public List<Bet> getBets(Long creatorId){
+    public List<BetDto> getBetsByCreatorId(Long creatorId) {
         //TODO: Not final
 
-        if (userRepository.findById(creatorId).isEmpty()){
-            throw new AppException("No creator found", HttpStatus.NOT_FOUND);
+        if (userRepository.findById(creatorId).isEmpty()) {
+            throw new AppException("No user found", HttpStatus.NOT_FOUND);
         }
 
-        return betRepository.findBetsByCreator(creatorId).orElse(null);
+        return betMapper.toBetDtos(betRepository.findBetsByCreator(creatorId).orElse(null));
     }
 
-    public void addOpponent(Long betId, Long opponentId) {
+    public List<BetDto> getAllBets() {
+        //TODO: Not final
+
+        return betMapper.toBetDtos(betRepository.findAll());
+    }
+
+    public BetDto addOpponent(Long betId, Long opponentId) {
         //TODO: Not final
 
         Optional<Bet> bet = betRepository.findBetById(betId);
-        if (bet.isEmpty()){
+        if (bet.isEmpty()) {
             throw new AppException("Bet not found", HttpStatus.NOT_FOUND);
         }
-        if (userRepository.findById(opponentId).isPresent()){
-            Bet updatedBet = bet.get();
+        Bet updatedBet = bet.get();
+        if (userRepository.findById(opponentId).isPresent()) {
             updatedBet.setOpponent(opponentId);
             betRepository.save(updatedBet);
         } else {
             throw new AppException("Opponent not found", HttpStatus.NOT_FOUND);
         }
+        return betMapper.toBetDto(updatedBet);
     }
 
-    public void addJudge(Long betId, Long judgeId) {
+    public BetDto addJudge(Long betId, Long judgeId) {
         //TODO: Not final
 
         Optional<Bet> bet = betRepository.findBetById(betId);
-        if (bet.isEmpty()){
+        if (bet.isEmpty()) {
             throw new AppException("Bet not found", HttpStatus.NOT_FOUND);
         }
-        if (userRepository.findById(judgeId).isPresent()){
-            Bet updatedBet = bet.get();
+        Bet updatedBet = bet.get();
+        if (userRepository.findById(judgeId).isPresent()) {
             updatedBet.setJudge(judgeId);
             betRepository.save(updatedBet);
         } else {
             throw new AppException("Judge not found", HttpStatus.NOT_FOUND);
         }
+        return betMapper.toBetDto(updatedBet);
     }
 
-    public void resolveBet(Long betId, Long winner) {
-        //TODO: Create bet resolving logic.
+    public BetDto resolveBet(Long betId, Long winner, Long currentOp) {
+        //TODO: Not final
+
+        Optional<Bet> bet = betRepository.findBetById(betId);
+        if (bet.isEmpty()) {
+            throw new AppException("Bet not found", HttpStatus.NOT_FOUND);
+        }
+        if (userRepository.findById(winner).isEmpty()) {
+            throw new AppException("Winner not found", HttpStatus.NOT_FOUND);
+        }
+        if (userRepository.findById(currentOp).isEmpty()) {
+            throw new AppException("Current user not found", HttpStatus.NOT_FOUND);
+        }
+        if (!bet.get().getJudge().equals(currentOp)) {
+            throw new AppException("User not allowed to resolve bet", HttpStatus.FORBIDDEN);
+        }
+        if (!bet.get().getWinner().equals(0L)) {
+            throw new AppException("Bet already resolved", HttpStatus.FORBIDDEN);
+        }
+
+        Bet currentBet = bet.get();
+        currentBet.setWinner(winner);
+        betRepository.save(currentBet);
+        return betMapper.toBetDto(currentBet);
     }
 
 }

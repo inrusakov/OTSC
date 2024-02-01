@@ -25,13 +25,13 @@ public class Bet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "creator", nullable = false)
+    @Column(name = "creator")
     private Long creator;
 
-    @Column(name = "title", columnDefinition = "TEXT", nullable = false)
+    @Column(name = "title", columnDefinition = "TEXT")
     private String title;
 
-    @Column(name = "description", columnDefinition = "TEXT", nullable = false)
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
     @Column(name = "date", columnDefinition = "DATE")

@@ -2,7 +2,6 @@ package com.otsc.backend.controllers;
 
 import com.otsc.backend.dtos.BetDto;
 import com.otsc.backend.dtos.UserDto;
-import com.otsc.backend.mappers.BetMapper;
 import com.otsc.backend.services.BetService;
 import com.otsc.backend.services.UserService;
 import jakarta.validation.Valid;
@@ -22,50 +21,65 @@ import java.util.List;
 public class BetController {
 
     private final BetService betService;
-    private final BetMapper betMapper;
     private final UserService userService;
 
-    @GetMapping("/bets")
-    public ResponseEntity<List<BetDto>> bets() {
+    @GetMapping("/betsByCreatorId")
+    public ResponseEntity<List<BetDto>> betsByCreatorId(@RequestParam Long userId) {
         //TODO: Not final
 
-        UserDto principal = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDto user = userService.findByLogin(principal.getLogin());
-        List<BetDto> bets = betMapper.toBetDtos(betService.getBets(user.getId()));
+        List<BetDto> bets = betService.getBetsByCreatorId(userId);
         return ResponseEntity.ok(bets);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<String> create(@RequestBody @Valid BetDto betDto) {
+    @GetMapping("/allBets")
+    public ResponseEntity<List<BetDto>> allBets(@RequestParam Long userId) {
+        //TODO: Not final
+
+        return ResponseEntity.ok(betService.getAllBets());
+    }
+
+    @GetMapping("/currentUserBets")
+    public ResponseEntity<List<BetDto>> currentUserBets(@RequestParam Long userId) {
         //TODO: Not final
 
         UserDto principal = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDto user = userService.findByLogin(principal.getLogin());
-        betService.createBet(betDto, user.getId());
-        return ResponseEntity.ok("Bet Created");
+        return ResponseEntity.ok(betService.getBetsByCreatorId(user.getId()));
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<BetDto> create(@RequestBody @Valid BetDto betDto) {
+        //TODO: Not final
+
+        UserDto principal = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDto user = userService.findByLogin(principal.getLogin());
+        BetDto bet = betService.createBet(betDto, user.getId());
+        return ResponseEntity.ok(bet);
     }
 
     @PostMapping("/setOpponent")
-    public ResponseEntity<String> setOpponent(@RequestParam Long betId, @RequestParam Long opponentId) {
+    public ResponseEntity<BetDto> setOpponent(@RequestParam Long betId, @RequestParam Long opponentId) {
         //TODO: Not final
 
-        betService.addOpponent(betId, opponentId);
-        return ResponseEntity.ok("Bet Created");
+        BetDto bet = betService.addOpponent(betId, opponentId);
+        return ResponseEntity.ok(bet);
     }
 
     @PostMapping("/setJudge")
-    public ResponseEntity<String> setJudge(@RequestParam Long betId, @RequestParam Long judgeId) {
+    public ResponseEntity<BetDto> setJudge(@RequestParam Long betId, @RequestParam Long judgeId) {
         //TODO: Not final
 
-        betService.addJudge(betId, judgeId);
-        return ResponseEntity.ok("Bet Created");
+        BetDto bet = betService.addJudge(betId, judgeId);
+        return ResponseEntity.ok(bet);
     }
 
     @PostMapping("/resolve")
-    public ResponseEntity<String> resolve(@RequestParam Long betId, @RequestParam Long winner) {
+    public ResponseEntity<BetDto> resolve(@RequestParam Long betId, @RequestParam Long winner) {
         //TODO: Not final
 
-        betService.resolveBet(betId, winner);
-        return ResponseEntity.ok("Bet Created");
+        UserDto principal = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDto user = userService.findByLogin(principal.getLogin());
+        BetDto bet = betService.resolveBet(betId, winner, user.getId());
+        return ResponseEntity.ok(bet);
     }
 }

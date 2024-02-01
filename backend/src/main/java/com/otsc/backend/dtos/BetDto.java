@@ -15,9 +15,10 @@ public class BetDto {
 
     private Long id;
     private Long creator;
+    private String title;
+    private String description;
+    private LocalDate date;
     private Long opponent;
     private Long judge;
     private Long winner;
-    private LocalDate date;
-    private String description;
 }
