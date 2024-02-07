@@ -32,14 +32,14 @@ public class BetController {
     }
 
     @GetMapping("/allBets")
-    public ResponseEntity<List<BetDto>> allBets(@RequestParam Long userId) {
+    public ResponseEntity<List<BetDto>> allBets() {
         //TODO: Not final
 
         return ResponseEntity.ok(betService.getAllBets());
     }
 
     @GetMapping("/currentUserBets")
-    public ResponseEntity<List<BetDto>> currentUserBets(@RequestParam Long userId) {
+    public ResponseEntity<List<BetDto>> currentUserBets() {
         //TODO: Not final
 
         UserDto principal = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

@@ -16,10 +16,12 @@ import { ContentComponent } from './outer/content/content.component';
 
 import { ButtonLogout } from './inner/button-logout/button-logout.component';
 import { InnerAppComponent } from './inner/inner-app/inner-app.component'; 
+import { InnerContentComponent } from './inner/inner-content/inner-content.component';
 
 import { AxiosService } from './axios.service';
 import { InnerHeaderComponent } from './inner/inner-header/inner-header.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { InnerContentChallenge } from './inner/inner-content/challenge/challenge.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AboutComponent,
     ContentComponent,
     InnerAppComponent,
-    InnerHeaderComponent
+    InnerHeaderComponent,
+    InnerContentComponent,
+    InnerContentChallenge
   ],
   imports: [
     BrowserModule,

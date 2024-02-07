@@ -1,0 +1,11 @@
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+  <h6 class="border-bottom pb-2 mb-0">My Challenges</h6>
+
+  <div *ngFor="let item of challenges">
+    <inner-challenge [username]="item.id" [title]="item.title" [color]="randomColor()"></inner-challenge>
+  </div>
+
+  <small class="d-block text-end mt-3">
+    <a href="#">All Challenges</a>
+  </small>
+</div>

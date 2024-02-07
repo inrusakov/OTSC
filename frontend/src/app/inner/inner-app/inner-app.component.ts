@@ -17,9 +17,17 @@ export class InnerAppComponent {
   }
 
   ngOnInit(): void {
-    if (!this.axiosService.checkAuth()) {
-      this.router.navigate(['/']);
-    }
+    this.axiosService.request(
+			"GET",
+			"/checkAuth", {})
+			.then(
+				response => {
+				}).catch(
+					error => {
+            this.axiosService.setAuthToken(null);
+						this.router.navigate(['/']);
+					}
+				);
   }
 
 }
