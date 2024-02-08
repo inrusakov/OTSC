@@ -22,6 +22,8 @@ import { AxiosService } from './axios.service';
 import { InnerHeaderComponent } from './inner/inner-header/inner-header.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InnerContentChallenge } from './inner/inner-content/challenge/challenge.component';
+import { InnerChallengeModal } from './inner/inner-content/challenge-modal/challenge-modal.component';
+import { InnerContentChallengeObserver } from './inner/inner-content/challenge-observer/challenge-observer.component';
 
 @NgModule({
   declarations: [
@@ -36,13 +38,15 @@ import { InnerContentChallenge } from './inner/inner-content/challenge/challenge
     InnerAppComponent,
     InnerHeaderComponent,
     InnerContentComponent,
-    InnerContentChallenge
+    InnerContentChallenge,
+    InnerContentChallengeObserver
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    InnerChallengeModal
   ],
   providers: [AxiosService, provideRouter(routes)],
   bootstrap: [AppComponent]

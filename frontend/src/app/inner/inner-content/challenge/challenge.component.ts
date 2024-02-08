@@ -8,5 +8,19 @@ import { Component, Input } from '@angular/core';
 export class InnerContentChallenge {
   @Input() username!: string; 
   @Input() title!: string;
-  @Input() color!: string;
+  color!: string;
+
+  ngOnInit(): void{
+    this.color = this.randomColor();
+  }
+
+  randomColor(): string {
+    let result = '';
+    for (let i = 0; i < 6; ++i) {
+      const value = Math.floor(16 * Math.random());
+      result += value.toString(16);
+    }
+    return '#' + result;
+  };
+  
 }

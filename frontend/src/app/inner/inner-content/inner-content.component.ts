@@ -12,28 +12,35 @@ export class InnerContentComponent {
   constructor(private axiosService: AxiosService) { }
 
   challenges!: any;
+  waiting!: boolean;
 
-  randomColor(): string {
-    let result = '';
-    for (let i = 0; i < 6; ++i) {
-      const value = Math.floor(16 * Math.random());
-      result += value.toString(16);
-    }
-    return '#' + result;
-  };
+  obsActive: boolean = false;
+  currentChallenge!: any;
 
   ngOnInit(): void {
+    this.waiting = true;
     this.axiosService.request(
-			"GET",
-			"/currentUserBets", {})
-			.then(
-				response => {
+      "GET",
+      "/currentUserBets", {})
+      .then(
+        response => {
+          this.waiting = false;
           this.challenges = response.data;
-          console.log(response);
-				}).catch(
-					error => {
-            
-					}
-				);
+        }).catch(
+          error => {
+
+          }
+        );
   }
+
+  proceedToObserver(challenge: any) {
+    this.obsActive = true;
+    this.currentChallenge = challenge;
+  }
+
+  exitObserver(){
+    this.obsActive = false;
+    this.currentChallenge = null;
+  }
+
 }
