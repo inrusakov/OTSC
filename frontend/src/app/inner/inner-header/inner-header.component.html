@@ -9,7 +9,7 @@
                         <img class="rounded-circle me-1" width="24" height="24" src="https://github.com/mdo.png" alt=""> 
                     </a>
 					<div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
-						<a ngbDropdownItem (click)="$event.preventDefault()">Profile</a>
+						<a ngbDropdownItem (click)="onShowProfileEvent.emit()">Profile</a>
 						<a ngbDropdownItem (click)="$event.preventDefault()">History</a>
 						<a ngbDropdownItem routerLink="/" (click)="$event.preventDefault()">Logout</a>
 					</div>

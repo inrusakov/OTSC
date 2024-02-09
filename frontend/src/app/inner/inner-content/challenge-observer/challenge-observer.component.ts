@@ -9,8 +9,4 @@ export class InnerContentChallengeObserver {
   @Input() item!: any;
   @Output() onObserverExit = new EventEmitter(); 
 
-  observerExit(){
-    this.onObserverExit.emit();
-  }
-  
 }

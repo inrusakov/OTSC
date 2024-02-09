@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./inner-app.component.css']
 })
 export class InnerAppComponent {
-  componentToShow: string = "welcome";
+  componentToShow: string = "challenges";
 
   constructor(private axiosService: AxiosService, private router: Router) { }
 

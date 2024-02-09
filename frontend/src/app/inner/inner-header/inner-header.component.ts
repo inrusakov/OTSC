@@ -8,4 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class InnerHeaderComponent {
 	@Input() pageTitle!: string;
+
+    @Output() onShowProfileEvent = new EventEmitter();
+
 }

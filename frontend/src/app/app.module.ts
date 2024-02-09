@@ -24,6 +24,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InnerContentChallenge } from './inner/inner-content/challenge/challenge.component';
 import { InnerChallengeModal } from './inner/inner-content/challenge-modal/challenge-modal.component';
 import { InnerContentChallengeObserver } from './inner/inner-content/challenge-observer/challenge-observer.component';
+import { InnerProfileComponent } from './inner/inner-profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { InnerContentChallengeObserver } from './inner/inner-content/challenge-o
     InnerHeaderComponent,
     InnerContentComponent,
     InnerContentChallenge,
-    InnerContentChallengeObserver
+    InnerContentChallengeObserver,
+    InnerProfileComponent
   ],
   imports: [
     BrowserModule,

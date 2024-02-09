@@ -1,2 +1,3 @@
-<inner-header [pageTitle] = "'OTSC'"></inner-header>
-<inner-content></inner-content>
+<inner-header [pageTitle]="'OTSC'" (onShowProfileEvent)="showComponent('profile')"></inner-header>
+<inner-content *ngIf="componentToShow == 'challenges'"></inner-content>
+<inner-profile *ngIf="componentToShow == 'profile'" (onLeaveProfile)="showComponent('challenges')"></inner-profile>
