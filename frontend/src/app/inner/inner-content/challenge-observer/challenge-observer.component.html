@@ -1,0 +1,15 @@
+
+<div class="container my-5">
+  <nav aria-label="breadcrumb" class="main-breadcrumb">
+    <button class="btn btn-primary rounded-pill px-3 m-3" type="button" (click)="onObserverExit.emit()">Back</button>
+  </nav>
+  <div class="position-relative p-5 text-left text-muted bg-body border border-dashed rounded-5">
+    <svg class="bi mt-5 mb-3" width="48" height="48">
+      <use xlink:href="#check2-circle"></use>
+    </svg>
+    <h1 class="text-body-emphasis">{{item.title}}</h1>
+    <p class="col-lg-6 mx-auto mb-4">
+      {{item.description}}
+    </p>
+  </div>
+</div>

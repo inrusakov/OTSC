@@ -1,0 +1,165 @@
+<div class="container">
+
+  <nav aria-label="breadcrumb" class="main-breadcrumb">
+    <button class="btn btn-primary rounded-pill px-3 m-3" type="button" (click)="onLeaveProfile.emit()">Back</button>
+  </nav>
+
+  <div class="row gutters-sm">
+    <div class="col-md-4 d-none d-md-block">
+      <div class="card">
+        <div class="card-body">
+          <nav class="nav flex-column nav-pills nav-gap-y-1">
+            <a (click)="showComponent('profile')" data-toggle="tab"
+              [ngClass]="active == 'profile' ? 'nav-item nav-link has-icon nav-link-faded active' : 'nav-item nav-link has-icon nav-link-faded'">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-user mr-2 m-1">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>Profile Information
+            </a>
+            <a (click)="showComponent('security')" data-toggle="tab"
+              [ngClass]="active == 'security' ? 'nav-item nav-link has-icon nav-link-faded active' : 'nav-item nav-link has-icon nav-link-faded'">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-shield mr-2 m-1">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>Security
+            </a>
+            <a (click)="showComponent('notification')" data-toggle="tab"
+              [ngClass]="active == 'notification' ? 'nav-item nav-link has-icon nav-link-faded active' : 'nav-item nav-link has-icon nav-link-faded'">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-bell mr-2 m-1">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+              </svg>Notification
+            </a>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header border-bottom mb-3 d-flex d-md-none">
+          <ul class="nav nav-tabs card-header-tabs nav-gap-x-1" role="tablist">
+            <li class="nav-item">
+              <a *ngIf="active == 'profile'" data-toggle="tab" class="nav-link has-icon active"><svg
+                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="feather feather-user">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg></a>
+            </li>
+            <li class="nav-item">
+              <a *ngIf="active == 'security'" data-toggle="tab" class="nav-link has-icon"><svg
+                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="feather feather-shield">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg></a>
+            </li>
+            <li class="nav-item">
+              <a *ngIf="active == 'notification'" data-toggle="tab" class="nav-link has-icon"><svg
+                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="feather feather-bell">
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg></a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body tab-content">
+          <div [ngClass]="active == 'profile' ? 'tab-pane active' : 'tab-pane'" id="profile">
+            <h6>YOUR PROFILE INFORMATION</h6>
+            <hr>
+            <form [formGroup]="profileUpdateForm" (ngSubmit)="onUpdateProfile()">
+              <div class="form-group">
+                <label for="name" class="form-label m-2">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter your name" formControlName="name">
+              </div>
+              <div class="form-group">
+                <label for="surname" class="form-label m-2">Surname</label>
+                <input type="text" class="form-control" id="surname" placeholder="Enter your surname"
+                  formControlName="surname">
+              </div>
+              <div class="form-group">
+                <label for="status" class="form-label m-2">Status</label>
+                <input type="text" class="form-control" id="status" placeholder="Enter your status"
+                  formControlName="status">
+              </div>
+
+              <button type="submit" class="btn btn-primary m-2" *ngIf="!waiting">Update Profile</button>
+
+              <div class="spinner-border m-2" role="status" *ngIf="waiting">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+
+              <button type="reset" class="btn btn-light m-2">Reset Changes</button>
+            </form>
+          </div>
+          <div [ngClass]="active == 'security' ? 'tab-pane active' : 'tab-pane'" id="security">
+            <h6>SECURITY SETTINGS</h6>
+            <hr>
+            <form [formGroup]="securityUpdateForm" (ngSubmit)="onUpdateSecurity()">
+              <div class="form-group">
+                <label for="oldPass" class="form-label m-2">Old Password</label>
+                <input type="password" class="form-control" id="oldPass" placeholder="Your Old Password"
+                  formControlName="oldPass" required>
+              </div>
+              <div class="form-group">
+                <label for="newPass" class="form-label m-2">New Password</label>
+                <input type="password" class="form-control" id="newPass" placeholder="Your New Password"
+                  formControlName="newPass" required>
+                <div class="small text-muted mb-3"
+                  *ngIf="!(securityUpdateForm.value.newPass === securityUpdateForm.value.newPass2)">Passwords not
+                  matching</div>
+              </div>
+              <div class="form-group">
+                <label for="newPass2" class="form-label m-2">New Password Confirmation</label>
+                <input type="password" class="form-control" id="newPass2" placeholder="Repeat Your New Password"
+                  formControlName="newPass2" required>
+                <div class="small text-muted mb-3"
+                  *ngIf="!(securityUpdateForm.value.newPass === securityUpdateForm.value.newPass2)">Passwords not
+                  matching</div>
+              </div>
+
+              <button type="submit" class="btn btn-primary m-2"
+                [disabled]="!securityUpdateForm.valid || !(securityUpdateForm.value.newPass === securityUpdateForm.value.newPass2)"
+                *ngIf="!waiting">
+                Update Profile
+              </button>
+
+              <div class="spinner-border m-2" role="status" *ngIf="waiting">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+
+              <button type="reset" class="btn btn-light m-2">Reset Changes</button>
+            </form>
+          </div>
+          <div [ngClass]="active == 'notification' ? 'tab-pane active' : 'tab-pane'" id="notification">
+            <h6>NOTIFICATION SETTINGS</h6>
+            <hr>
+            <form>
+              <div class="form-group">
+                <label class="d-block mb-0">Security Alerts</label>
+                <div class="small text-muted mb-3">Receive security alert notifications via email</div>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+                  <label class="custom-control-label" for="customCheck1">Email each time a vulnerability is
+                    found</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck2" checked="">
+                  <label class="custom-control-label" for="customCheck2">Email a digest summary of vulnerability</label>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

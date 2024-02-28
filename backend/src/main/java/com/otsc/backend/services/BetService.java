@@ -33,6 +33,16 @@ public class BetService {
         return betMapper.toBetDto(bet);
     }
 
+    public BetDto getBetById(Long betId) {
+        //TODO: Not final
+
+        if (betRepository.findById(betId).isEmpty()) {
+            throw new AppException("No bet found", HttpStatus.NOT_FOUND);
+        }
+
+        return betMapper.toBetDto(betRepository.findBetById(betId).orElse(null));
+    }
+
     public List<BetDto> getBetsByCreatorId(Long creatorId) {
         //TODO: Not final
 

@@ -16,8 +16,15 @@ import { ContentComponent } from './outer/content/content.component';
 
 import { ButtonLogout } from './inner/button-logout/button-logout.component';
 import { InnerAppComponent } from './inner/inner-app/inner-app.component'; 
+import { InnerContentComponent } from './inner/inner-content/inner-content.component';
 
 import { AxiosService } from './axios.service';
+import { InnerHeaderComponent } from './inner/inner-header/inner-header.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { InnerContentChallenge } from './inner/inner-content/challenge/challenge.component';
+import { InnerChallengeModal } from './inner/inner-content/challenge-modal/challenge-modal.component';
+import { InnerContentChallengeObserver } from './inner/inner-content/challenge-observer/challenge-observer.component';
+import { InnerProfileModal } from './inner/inner-profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -29,12 +36,19 @@ import { AxiosService } from './axios.service';
     FeaturesComponent,
     AboutComponent,
     ContentComponent,
-    InnerAppComponent
+    InnerAppComponent,
+    InnerHeaderComponent,
+    InnerContentComponent,
+    InnerContentChallenge,
+    InnerContentChallengeObserver
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    NgbModule,
+    InnerChallengeModal,
+    InnerProfileModal
   ],
   providers: [AxiosService, provideRouter(routes)],
   bootstrap: [AppComponent]

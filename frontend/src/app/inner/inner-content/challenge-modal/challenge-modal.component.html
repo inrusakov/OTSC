@@ -1,0 +1,37 @@
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+  <div class="d-grid gap-2">
+    <button class="btn btn-primary" type="button" mdbRipple (click)="openLg(content)">Challenge someone!</button>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Create Challenge</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="challengeForm" (ngSubmit)="onSubmit()">
+
+      <div class="mb-3">
+        <label for="title" class="form-label">Title: </label>
+        <input id="title" type="text" class="form-control" formControlName="title" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description: </label>
+        <textarea class="form-control" rows="3" id="description" type="text" formControlName="description"
+          required></textarea>
+      </div>
+
+      <div class="modal-footer" *ngIf="!waiting">
+        <button type="submit" [disabled]="!challengeForm.valid" class="btn btn-success"
+          (click)="modal.close('Close click')">Submit</button>
+      </div>
+
+      <div class="spinner-border" role="status" *ngIf="waiting">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </form>
+  </div>
+
+</ng-template>

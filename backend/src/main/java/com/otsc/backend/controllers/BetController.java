@@ -23,6 +23,20 @@ public class BetController {
     private final BetService betService;
     private final UserService userService;
 
+    @GetMapping("/allBets")
+    public ResponseEntity<List<BetDto>> allBets() {
+        //TODO: Not final
+
+        return ResponseEntity.ok(betService.getAllBets());
+    }
+
+    @GetMapping("/getBetById")
+    public ResponseEntity<BetDto> getBetById(@RequestParam Long betId) {
+        //TODO: Not final
+
+        return ResponseEntity.ok(betService.getBetById(betId));
+    }
+
     @GetMapping("/betsByCreatorId")
     public ResponseEntity<List<BetDto>> betsByCreatorId(@RequestParam Long userId) {
         //TODO: Not final
@@ -31,15 +45,8 @@ public class BetController {
         return ResponseEntity.ok(bets);
     }
 
-    @GetMapping("/allBets")
-    public ResponseEntity<List<BetDto>> allBets(@RequestParam Long userId) {
-        //TODO: Not final
-
-        return ResponseEntity.ok(betService.getAllBets());
-    }
-
     @GetMapping("/currentUserBets")
-    public ResponseEntity<List<BetDto>> currentUserBets(@RequestParam Long userId) {
+    public ResponseEntity<List<BetDto>> currentUserBets() {
         //TODO: Not final
 
         UserDto principal = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

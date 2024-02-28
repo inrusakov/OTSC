@@ -8,18 +8,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./inner-app.component.css']
 })
 export class InnerAppComponent {
-	componentToShow: string = "welcome";
+  componentToShow: string = "challenges";
 
-	constructor(private axiosService: AxiosService, private router: Router) { }
+  constructor(private axiosService: AxiosService, private router: Router) { }
 
-	showComponent(componentToShow: string): void {
+  showComponent(componentToShow: string): void {
     this.componentToShow = componentToShow;
   }
 
   ngOnInit(): void {
-    if (!this.axiosService.checkAuth()){
-		this.router.navigate(['/']);
-	}
+    this.axiosService.request(
+			"GET",
+			"/checkAuth", {})
+			.then(
+				response => {
+				}).catch(
+					error => {
+            this.axiosService.setAuthToken(null);
+						this.router.navigate(['/']);
+					}
+				);
   }
 
 }
