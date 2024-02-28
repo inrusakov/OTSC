@@ -24,7 +24,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InnerContentChallenge } from './inner/inner-content/challenge/challenge.component';
 import { InnerChallengeModal } from './inner/inner-content/challenge-modal/challenge-modal.component';
 import { InnerContentChallengeObserver } from './inner/inner-content/challenge-observer/challenge-observer.component';
-import { InnerProfileComponent } from './inner/inner-profile/profile.component';
+import { InnerProfileModal } from './inner/inner-profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -40,15 +40,15 @@ import { InnerProfileComponent } from './inner/inner-profile/profile.component';
     InnerHeaderComponent,
     InnerContentComponent,
     InnerContentChallenge,
-    InnerContentChallengeObserver,
-    InnerProfileComponent
+    InnerContentChallengeObserver
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     NgbModule,
-    InnerChallengeModal
+    InnerChallengeModal,
+    InnerProfileModal
   ],
   providers: [AxiosService, provideRouter(routes)],
   bootstrap: [AppComponent]
