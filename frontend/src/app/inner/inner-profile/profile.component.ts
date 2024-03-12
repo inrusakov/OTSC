@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { AxiosService } from '../../axios.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -9,18 +9,33 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
-  imports: [ReactiveFormsModule, CommonModule ]
+  imports: [ReactiveFormsModule, CommonModule, RouterModule]
 })
 export class InnerProfileModal {
-
-  @Output() onLeaveProfile = new EventEmitter();
 
   active: string = "profile";
   waiting: boolean = false; 
 
+  firstName!: string;
+  lastName!: string;
+  status!: string;
+
   constructor(private formBuilder: FormBuilder, private axiosService: AxiosService, private router: Router) { }
 
   ngOnInit(): void {
+    this.axiosService.request(
+      "GET",
+      "/profile", {})
+      .then(
+        response => {
+          this.firstName = response.data.firstName;
+          this.lastName = response.data.lastName;
+          this.status = response.data.status;
+        }).catch(
+          error => {
+
+          }
+        );
   }
 
   showComponent(active: string): void {
@@ -36,15 +51,18 @@ export class InnerProfileModal {
   onUpdateProfile(){
     this.waiting = true;
     this.axiosService.request(
-      "POST",
-      "/updateProfile", {
-      name: this.profileUpdateForm.value.name,
-      surname: this.profileUpdateForm.value.surname,
+      "PUT",
+      "/profile", {
+      firstName: this.profileUpdateForm.value.name,
+      lastName: this.profileUpdateForm.value.surname,
       status: this.profileUpdateForm.value.status
     })
       .then(
         response => {
           this.waiting = false;
+          this.firstName = response.data.firstName;
+          this.lastName = response.data.lastName;
+          this.status = response.data.status;
         }).catch(
           error => {
 

@@ -25,6 +25,11 @@ export class InnerChallengeModal {
     description: ['']
   });
 
+  seriesForm = this.formBuilder.group({
+    title: ['', Validators.required],
+    description: ['']
+  });
+
   onSubmit() {
     this.waiting = true;
     this.axiosService.request(

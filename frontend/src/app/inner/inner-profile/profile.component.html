@@ -1,7 +1,14 @@
 <div class="container">
 
   <nav aria-label="breadcrumb" class="main-breadcrumb">
-    <button class="btn btn-primary rounded-pill px-3 m-3" type="button" (click)="onLeaveProfile.emit()">Back</button>
+    <button routerLink="/app" class="btn btn-primary rounded-pill px-3 m-3 d-inline-flex align-items-center"
+      type="button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H6M12 5l-7 7 7 7" />
+      </svg>
+      Back
+    </button>
   </nav>
 
   <div class="row gutters-sm">
@@ -77,17 +84,17 @@
             <hr>
             <form [formGroup]="profileUpdateForm" (ngSubmit)="onUpdateProfile()">
               <div class="form-group">
-                <label for="name" class="form-label m-2">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Enter your name" formControlName="name">
+                <label for="name" class="form-label m-2">Current Name: <b>{{firstName}}</b></label>
+                <input type="text" class="form-control" id="name" placeholder="Enter new name" formControlName="name">
               </div>
               <div class="form-group">
-                <label for="surname" class="form-label m-2">Surname</label>
-                <input type="text" class="form-control" id="surname" placeholder="Enter your surname"
+                <label for="surname" class="form-label m-2">Current Last Name: <b>{{lastName}}</b></label>
+                <input type="text" class="form-control" id="surname" placeholder="Enter new surname"
                   formControlName="surname">
               </div>
               <div class="form-group">
-                <label for="status" class="form-label m-2">Status</label>
-                <input type="text" class="form-control" id="status" placeholder="Enter your status"
+                <label for="status" class="form-label m-2">Current Status: <b>{{status}}</b></label>
+                <input type="text" class="form-control" id="status" placeholder="Enter new status"
                   formControlName="status">
               </div>
 

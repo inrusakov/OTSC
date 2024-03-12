@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { AxiosService } from 'src/app/axios.service';
 
 
 @Component({
@@ -9,6 +11,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class InnerHeaderComponent {
 	@Input() pageTitle!: string;
 
-    @Output() onShowProfileEvent = new EventEmitter();
+  constructor(private axiosService: AxiosService, private router: Router){}
 
+  logOut(){
+    this.axiosService.setAuthToken(null);
+	  this.router.navigate(['/']);
+  }
+  
 }

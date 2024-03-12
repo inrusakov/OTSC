@@ -14,9 +14,6 @@ export class InnerContentComponent {
   challenges!: any;
   waiting!: boolean;
 
-  obsActive: boolean = false;
-  currentChallenge!: any;
-
   ngOnInit(): void {
     this.waiting = true;
     this.axiosService.request(
@@ -31,16 +28,6 @@ export class InnerContentComponent {
 
           }
         );
-  }
-
-  proceedToObserver(challenge: any) {
-    this.obsActive = true;
-    this.currentChallenge = challenge;
-  }
-
-  exitObserver(){
-    this.obsActive = false;
-    this.currentChallenge = null;
   }
 
 }

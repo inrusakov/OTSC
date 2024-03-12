@@ -1,6 +1,7 @@
 package com.otsc.backend.services;
 
 import com.otsc.backend.dtos.CredentialsDto;
+import com.otsc.backend.dtos.ProfileDto;
 import com.otsc.backend.dtos.SignUpDto;
 import com.otsc.backend.dtos.UserDto;
 import com.otsc.backend.entities.User;
@@ -54,6 +55,28 @@ public class UserService {
         User user = userRepository.findByLogin(login)
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
         return userMapper.toUserDto(user);
+    }
+
+    public ProfileDto getProfileInfo(String login) {
+        User user = userRepository.findByLogin(login)
+                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+        return userMapper.userToProfileDto(user);
+    }
+
+    public ProfileDto changeProfileInfo(String login, ProfileDto profileDto) {
+        User user = userRepository.findByLogin(login)
+                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+        if (!profileDto.getFirstName().isEmpty()) {
+            user.setFirstName(profileDto.getFirstName());
+        }
+        if (!profileDto.getLastName().isEmpty()) {
+            user.setLastName(profileDto.getLastName());
+        }
+        if (!profileDto.getStatus().isEmpty()) {
+            user.setStatus(profileDto.getStatus());
+        }
+        userRepository.save(user);
+        return userMapper.userToProfileDto(user);
     }
 
 }

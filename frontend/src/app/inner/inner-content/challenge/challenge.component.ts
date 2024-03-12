@@ -6,8 +6,9 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./challenge.component.css']
 })
 export class InnerContentChallenge {
-  @Input() username!: string; 
-  @Input() title!: string;
+  @Input() id!: string;
+  @Input() title!: string; 
+  @Input() description!: string;
   color!: string;
 
   ngOnInit(): void{

@@ -32,6 +32,10 @@ public class User {
     @Size(max = 100)
     private String lastName;
 
+    @Column(name = "status")
+    @Size(max = 100)
+    private String status;
+
     @Column(nullable = false)
     @Size(max = 100)
     private String login;

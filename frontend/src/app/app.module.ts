@@ -25,6 +25,7 @@ import { InnerContentChallenge } from './inner/inner-content/challenge/challenge
 import { InnerChallengeModal } from './inner/inner-content/challenge-modal/challenge-modal.component';
 import { InnerContentChallengeObserver } from './inner/inner-content/challenge-observer/challenge-observer.component';
 import { InnerProfileModal } from './inner/inner-profile/profile.component';
+import { InnerContentChallengeNotFound } from './inner/inner-content/challenge-404/challenge-404.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { InnerProfileModal } from './inner/inner-profile/profile.component';
     InnerHeaderComponent,
     InnerContentComponent,
     InnerContentChallenge,
-    InnerContentChallengeObserver
+    InnerContentChallengeObserver,
+    InnerContentChallengeNotFound
   ],
   imports: [
     BrowserModule,
