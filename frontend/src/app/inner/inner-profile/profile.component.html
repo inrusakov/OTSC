@@ -108,6 +108,8 @@
             </form>
           </div>
           <div [ngClass]="active == 'security' ? 'tab-pane active' : 'tab-pane'" id="security">
+            <ngbd-alert-selfclosing [type]="'success'" [message]="'Password changed'" [events]="onPassSubmited.asObservable()"></ngbd-alert-selfclosing>
+            <ngbd-alert-selfclosing [type]="'danger'" [message]="'Error'" [events]="onPassError.asObservable()"></ngbd-alert-selfclosing>
             <h6>SECURITY SETTINGS</h6>
             <hr>
             <form [formGroup]="securityUpdateForm" (ngSubmit)="onUpdateSecurity()">

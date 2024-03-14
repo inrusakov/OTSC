@@ -1,5 +1,6 @@
 package com.otsc.backend.services;
 
+import com.otsc.backend.dtos.CredentialChangeDto;
 import com.otsc.backend.dtos.CredentialsDto;
 import com.otsc.backend.dtos.ProfileDto;
 import com.otsc.backend.dtos.SignUpDto;
@@ -14,6 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.nio.CharBuffer;
+import java.util.IllegalFormatCodePointException;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -77,6 +80,27 @@ public class UserService {
         }
         userRepository.save(user);
         return userMapper.userToProfileDto(user);
+    }
+
+    public UserDto changePass(CredentialChangeDto request, String sender){
+        User user = userRepository.findByLogin(request.getLogin())
+                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+        userRepository.findByLogin(sender)
+                .orElseThrow(() -> new AppException("Unknown sender", HttpStatus.NOT_FOUND));
+        if (!Objects.equals(request.getLogin(), sender)){
+            throw new AppException("Sender is not equal to account owner", HttpStatus.BAD_REQUEST);
+        }
+        if (!Objects.equals(request.getOldPass(), request.getNewPass())){
+            throw new AppException("Old pass is not equal to new one", HttpStatus.BAD_REQUEST);
+        }
+        if (!passwordEncoder.matches(CharBuffer.wrap(request.getOldPass()), user.getPassword())) {
+            throw new AppException("Invalid password", HttpStatus.BAD_REQUEST);
+        }
+        user.setPassword(passwordEncoder.encode(CharBuffer.wrap(request.getNewPass())));
+
+        User savedUser = userRepository.save(user);
+
+        return userMapper.toUserDto(savedUser);
     }
 
 }

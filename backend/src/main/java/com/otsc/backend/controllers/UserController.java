@@ -1,13 +1,16 @@
 package com.otsc.backend.controllers;
 
+import com.otsc.backend.dtos.CredentialChangeDto;
 import com.otsc.backend.dtos.ProfileDto;
 import com.otsc.backend.dtos.UserDto;
+import com.otsc.backend.entities.User;
 import com.otsc.backend.services.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,8 +32,15 @@ public class UserController {
     public ResponseEntity<ProfileDto> getProfile() {
         UserDto principal = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         ProfileDto updatedProfile = userService.getProfileInfo(principal.getLogin());
+        updatedProfile.setLogin(principal.getLogin());
         return ResponseEntity.ok(updatedProfile);
     }
-    //TODO: Change pass
+
+    @PostMapping("/changePass")
+    public ResponseEntity<UserDto> changePassword(@RequestBody @Valid CredentialChangeDto changeDto){
+        UserDto principal = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDto updatedDto = userService.changePass(changeDto, principal.getLogin());
+        return ResponseEntity.ok(updatedDto);
+    }
     //TODO: Notification settings update
 }

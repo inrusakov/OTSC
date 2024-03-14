@@ -9,11 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProfileDto {
+public class CredentialChangeDto {
 
     private String login;
-    private String firstName;
-    private String lastName;
-    private String status;
-
+    private String oldPass;
+    private String newPass;
 }

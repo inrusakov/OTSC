@@ -3,19 +3,25 @@ import { AxiosService } from '../../axios.service';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NgbdAlertSelfclosing } from '../elements/self-closing-alert/alert.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'inner-profile',
   standalone: true,
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
-  imports: [ReactiveFormsModule, CommonModule, RouterModule]
+  imports: [ReactiveFormsModule, CommonModule, RouterModule, NgbdAlertSelfclosing]
 })
 export class InnerProfileModal {
 
-  active: string = "profile";
-  waiting: boolean = false; 
+  onPassSubmited: Subject<void> = new Subject<void>();
+  onPassError: Subject<void> = new Subject<void>();
 
+  active: string = "profile";
+  waiting: boolean = false;
+
+  login!: string;
   firstName!: string;
   lastName!: string;
   status!: string;
@@ -28,6 +34,7 @@ export class InnerProfileModal {
       "/profile", {})
       .then(
         response => {
+          this.login = response.data.login;
           this.firstName = response.data.firstName;
           this.lastName = response.data.lastName;
           this.status = response.data.status;
@@ -39,16 +46,16 @@ export class InnerProfileModal {
   }
 
   showComponent(active: string): void {
-		this.active = active;
-	}
-  
+    this.active = active;
+  }
+
   profileUpdateForm = this.formBuilder.group({
     name: [''],
     surname: [''],
-    status:['']
+    status: ['']
   });
 
-  onUpdateProfile(){
+  onUpdateProfile() {
     this.waiting = true;
     this.axiosService.request(
       "PUT",
@@ -71,26 +78,28 @@ export class InnerProfileModal {
   }
 
   securityUpdateForm = this.formBuilder.group({
-    oldPass: [''],
-    newPass: [''],
-    newPass2:['']
+    oldPass: ['', Validators.required],
+    newPass: ['', Validators.required],
+    newPass2: ['', Validators.required]
   });
 
-  onUpdateSecurity(){
+  onUpdateSecurity() {
     this.waiting = true;
     this.axiosService.request(
       "POST",
-      "/updateSecurity", {
+      "/changePass", {
+      login: this.login,
       oldPass: this.securityUpdateForm.value.oldPass,
-      newPass: this.securityUpdateForm.value.newPass,
-      newPass2: this.securityUpdateForm.value.newPass2
+      newPass: this.securityUpdateForm.value.newPass
     })
       .then(
         response => {
           this.waiting = false;
+          this.onPassSubmited.next();
         }).catch(
           error => {
-
+            this.waiting = false;
+            this.onPassError.next();
           }
         );
   }
