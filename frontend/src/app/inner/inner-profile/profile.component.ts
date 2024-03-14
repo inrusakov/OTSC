@@ -3,7 +3,7 @@ import { AxiosService } from '../../axios.service';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NgbdAlertSelfclosing } from '../elements/self-closing-alert/alert.component';
+import { NgbdAlertSelfclosing } from '../../elements/self-closing-alert/alert.component';
 import { Subject } from 'rxjs';
 
 @Component({

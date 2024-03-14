@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AxiosService } from '../../axios.service';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 
 @Component({
 	selector: 'app-content',
@@ -9,16 +10,13 @@ import { Router } from '@angular/router';
 })
 export class ContentComponent {
 	componentToShow: string = "welcome";
-	alert = "hidden";
+
+	onCredentialsError: Subject<void> = new Subject<void>();
 
 	constructor(private axiosService: AxiosService, private router: Router) { }
 
 	showComponent(componentToShow: string): void {
 		this.componentToShow = componentToShow;
-	}
-
-	hideAlert() {
-		this.alert = 'hidden';
 	}
 
 	proceedToApp() {
@@ -50,7 +48,7 @@ export class ContentComponent {
 				}).catch(
 					error => {
 						this.axiosService.setAuthToken(null);
-						this.alert = 'active';
+						this.onCredentialsError.next();
 					}
 				);
 
@@ -73,7 +71,7 @@ export class ContentComponent {
 				}).catch(
 					error => {
 						this.axiosService.setAuthToken(null);
-						this.alert = 'active';
+						this.onCredentialsError.next();
 					}
 				);
 

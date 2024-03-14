@@ -9,7 +9,6 @@ export class LoginFormComponent {
 
   @Output() onSubmitLoginEvent = new EventEmitter();
   @Output() onSubmitRegisterEvent = new EventEmitter();
-  @Output() onHideAlert = new EventEmitter();
 
 	active: string = "login";
   firstName: string = "";
@@ -19,12 +18,10 @@ export class LoginFormComponent {
 
 	onLoginTab(): void {
 		this.active = "login"
-    this.onHideAlert.emit();
 	}
 
 	onRegisterTab(): void {
 		this.active = "register";
-    this.onHideAlert.emit();
 	}
 
   onSubmitLogin(): void {

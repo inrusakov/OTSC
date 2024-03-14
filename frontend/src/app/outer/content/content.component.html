@@ -5,9 +5,8 @@
 
 <div>
 
-  <div *ngIf="alert == 'active'" class="alert alert-danger form-content row justify-content-center" role="alert">
-    Wrong Credentials!
-  </div>
+  <ngbd-alert-selfclosing [type]="'danger'" [message]="'Wrong Credentials'" [events]="onCredentialsError.asObservable()"></ngbd-alert-selfclosing>
+
 
   <app-welcome-content *ngIf="componentToShow == 'welcome'" 
   (loginEvent)="proceedToApp()"
@@ -20,7 +19,6 @@
   <app-login-form *ngIf="componentToShow == 'login'" 
     (onSubmitLoginEvent)="onLogin($event)" 
     (onSubmitRegisterEvent)="onRegister($event)"
-    (onHideAlert)="hideAlert()"
   />
 
 </div>

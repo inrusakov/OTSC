@@ -26,7 +26,7 @@ import { InnerChallengeModal } from './inner/inner-content/challenge-modal/chall
 import { InnerContentChallengeObserver } from './inner/inner-content/challenge-observer/challenge-observer.component';
 import { InnerProfileModal } from './inner/inner-profile/profile.component';
 import { InnerContentChallengeNotFound } from './inner/inner-content/challenge-404/challenge-404.component';
-import { NgbdAlertSelfclosing } from './inner/elements/self-closing-alert/alert.component';
+import { NgbdAlertSelfclosing } from './elements/self-closing-alert/alert.component';
 
 @NgModule({
   declarations: [
