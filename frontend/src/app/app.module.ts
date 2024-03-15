@@ -14,19 +14,20 @@ import { FeaturesComponent } from './outer/content/features-content/features.com
 import { AboutComponent } from './outer/content/about-content/about.component';
 import { ContentComponent } from './outer/content/content.component';
 
-import { ButtonLogout } from './inner/button-logout/button-logout.component';
+import { ButtonLogout } from './elements/button-logout/button-logout.component';
 import { InnerAppComponent } from './inner/inner-app/inner-app.component'; 
 import { InnerContentComponent } from './inner/inner-content/inner-content.component';
 
 import { AxiosService } from './axios.service';
-import { InnerHeaderComponent } from './inner/inner-header/inner-header.component';
+import { InnerHeaderComponent } from './inner/header/inner-header.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { InnerContentChallenge } from './inner/inner-content/challenge/challenge.component';
-import { InnerChallengeModal } from './inner/inner-content/challenge-modal/challenge-modal.component';
+import { InnerContentChallenge } from './inner/inner-content/challenge-table-content/challenge.component';
+import { InnerChallengeModal } from './elements/challenge-create-modal/challenge-modal.component';
 import { InnerContentChallengeObserver } from './inner/inner-content/challenge-observer/challenge-observer.component';
-import { InnerProfileModal } from './inner/inner-profile/profile.component';
+import { InnerProfileModal } from './inner/profile/profile.component';
 import { InnerContentChallengeNotFound } from './inner/inner-content/challenge-404/challenge-404.component';
 import { NgbdAlertSelfclosing } from './elements/self-closing-alert/alert.component';
+import { ProfileParagraph } from './elements/profile-paragraph/profile-p.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { NgbdAlertSelfclosing } from './elements/self-closing-alert/alert.compon
     InnerContentComponent,
     InnerContentChallenge,
     InnerContentChallengeObserver,
-    InnerContentChallengeNotFound
+    InnerContentChallengeNotFound,
+    ProfileParagraph
   ],
   imports: [
     BrowserModule,

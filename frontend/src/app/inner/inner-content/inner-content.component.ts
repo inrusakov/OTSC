@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AxiosService } from 'src/app/axios.service';
-import { InnerContentChallenge } from './challenge/challenge.component';
 
 @Component({
   selector: 'inner-content',

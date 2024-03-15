@@ -66,6 +66,12 @@ public class UserService {
         return userMapper.userToProfileDto(user);
     }
 
+    public ProfileDto getProfileById(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+        return userMapper.userToProfileDto(user);
+    }
+
     public ProfileDto changeProfileInfo(String login, ProfileDto profileDto) {
         User user = userRepository.findByLogin(login)
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
