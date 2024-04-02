@@ -1,6 +1,7 @@
 package com.otsc.backend.services;
 
 import com.otsc.backend.dtos.BetDto;
+import com.otsc.backend.dtos.UserDto;
 import com.otsc.backend.entities.Bet;
 import com.otsc.backend.exceptions.AppException;
 import com.otsc.backend.mappers.BetMapper;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -18,10 +20,42 @@ import java.util.Optional;
 public class BetService {
 
     private final BetRepository betRepository;
-
     private final UserRepository userRepository;
-
+    private final UserService userService;
     private final BetMapper betMapper;
+
+    public static final String ROLE_NONE = "none";
+    public static final String ROLE_CREATOR = "creator";
+    public static final String ROLE_OPPONENT = "opponent";
+    public static final String ROLE_JUDGE = "judge";
+
+    public boolean isBetPresent(Long betId) {
+        return betRepository.findById(betId).isPresent();
+    }
+
+    public String isUserAllowed(Long betId, String login){
+        if(!isBetPresent(betId)){
+            return ROLE_NONE;
+        }
+        if (userRepository.findByLogin(login).isEmpty()){
+            return ROLE_NONE;
+        }
+
+        BetDto bet = getBetById(betId);
+        Long creatorId = bet.getCreator();
+        Long opponentId = bet.getOpponent();
+        Long judgeId = bet.getJudge();
+        UserDto userDto = userService.findByLogin(login);
+        if (Objects.equals(userDto.getId(), creatorId)){
+            return ROLE_CREATOR;
+        } else if (Objects.equals(userDto.getId(), opponentId)){
+            return ROLE_OPPONENT;
+        } else if (Objects.equals(userDto.getId(), judgeId)){
+            return ROLE_JUDGE;
+        } else {
+            return ROLE_NONE;
+        }
+    }
 
     public BetDto createBet(BetDto betDto, Long creatorId) {
         //TODO: Not final
@@ -51,6 +85,16 @@ public class BetService {
         }
 
         return betMapper.toBetDtos(betRepository.findBetsByCreator(creatorId).orElse(null));
+    }
+
+    public List<BetDto> getBetsWhereUserParticipates(Long userId) {
+        //TODO: Not final
+
+        if (userRepository.findById(userId).isEmpty()) {
+            throw new AppException("No user found", HttpStatus.NOT_FOUND);
+        }
+
+        return betMapper.toBetDtos(betRepository.findBetsByOpponentOrJudge(userId, userId).orElse(null));
     }
 
     public List<BetDto> getAllBets() {

@@ -1,0 +1,53 @@
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+  <div class="d-flex gap-2 justify-content-between">
+    <button class="m-2 flex-fill btn btn-primary" type="button" mdbRipple (click)="openLg(message)">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<ng-template #message let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Create Challenge</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+
+      <div class="mb-3">
+        <label for="text" class="form-label">Text: </label>
+        <textarea class="form-control" rows="3" id="text" type="text" formControlName="text"
+          required></textarea>
+      </div>
+
+      <div class="mb-3">
+        <div class="container px-4 text-center">
+          <div class="row">
+            <div class="col">
+              <label class="btn btn-default p-0">
+                <input type="file" accept="image/*" (change)="selectFile($event)" />
+              </label>
+            </div>
+          </div>
+          <div *ngIf="preview != ''" class="row">
+            <div class="col">
+              <img class="img-fluid" [src]="preview" class="preview" height="200px" width="200px">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer" *ngIf="!waiting">
+        <button type="submit" [disabled]="!messageForm.valid" class="btn btn-success"
+          (click)="modal.close('Close click')">Submit</button>
+      </div>
+
+      <div class="spinner-border" role="status" *ngIf="waiting">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </form>
+  </div>
+</ng-template>

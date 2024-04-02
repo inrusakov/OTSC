@@ -30,7 +30,7 @@
         </svg>
         <div>
           <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Creator</h3>
-          <profile-p [profile] = "creatorProfile" *ngIf="creatorId()"></profile-p>
+          <profile-p [profile]="creatorProfile" *ngIf="creatorId()"></profile-p>
           <p *ngIf="!creatorId()">Empty</p>
         </div>
       </div>
@@ -48,7 +48,7 @@
         </svg>
         <div>
           <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Opponent</h3>
-          <profile-p [profile] = "opponentProfile" *ngIf="opponentId()"></profile-p>
+          <profile-p [profile]="opponentProfile" *ngIf="opponentId()"></profile-p>
           <p *ngIf="!opponentId()">Empty</p>
         </div>
       </div>
@@ -67,13 +67,13 @@
         </svg>
         <div>
           <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Judge</h3>
-          <profile-p [profile] = "judgeProfile" *ngIf="judgeId()"></profile-p>
+          <profile-p [profile]="judgeProfile" *ngIf="judgeId()"></profile-p>
           <p *ngIf="!judgeId()">Empty</p>
         </div>
       </div>
       <div class="col d-flex justify-content-center align-items-start">
-        <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
           <line x1="16" y1="2" x2="16" y2="6"></line>
           <line x1="8" y1="2" x2="8" y2="6"></line>
@@ -85,9 +85,11 @@
         </div>
       </div>
     </div>
+    <chat [betId] = 'betId' [thisUserRole] = 'thisUserRole' [isUserAllowed] = 'isUserAllowed'></chat>
   </div>
 
   <div class="spinner-border" role="status" *ngIf="waiting">
     <span class="visually-hidden">Loading...</span>
   </div>
+
 </div>

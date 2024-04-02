@@ -28,6 +28,10 @@ import { InnerProfileModal } from './inner/profile/profile.component';
 import { InnerContentChallengeNotFound } from './inner/inner-content/challenge-404/challenge-404.component';
 import { NgbdAlertSelfclosing } from './elements/self-closing-alert/alert.component';
 import { ProfileParagraph } from './elements/profile-paragraph/profile-p.component';
+import { ImageView } from './elements/image-view/image-view.component';
+import { Chat } from './elements/chat/chat.component';
+import { ChatMessage } from './elements/chat-message/message.component';
+import { MessageModal } from './elements/message-modal/message-modal.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,10 @@ import { ProfileParagraph } from './elements/profile-paragraph/profile-p.compone
     InnerContentChallenge,
     InnerContentChallengeObserver,
     InnerContentChallengeNotFound,
-    ProfileParagraph
+    ProfileParagraph,
+    ImageView,
+    Chat,
+    ChatMessage
   ],
   imports: [
     BrowserModule,
@@ -54,7 +61,8 @@ import { ProfileParagraph } from './elements/profile-paragraph/profile-p.compone
     NgbModule,
     InnerChallengeModal,
     InnerProfileModal,
-    NgbdAlertSelfclosing
+    NgbdAlertSelfclosing,
+    MessageModal,
   ],
   providers: [AxiosService, provideRouter(routes)],
   bootstrap: [AppComponent]

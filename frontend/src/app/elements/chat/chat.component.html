@@ -1,0 +1,13 @@
+<div class="chat-container bg-body-tertiary">
+    <div class="spinner-border" role="status" *ngIf="waiting">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <ul class="chat-box chatContainerScroll" *ngIf="!waiting">
+        <div *ngFor="let item of chat">
+            <message [alignment]="item.alignment" [avatar]="item.avatar"
+            [name]="item.name" [text]="item.text" [imageInMessage]="item.imageInMessage"
+            [imagePath]="item.imagePath" [time]="item.time"></message>
+        </div>
+    </ul>
+    <add-message-modal [betId]='betId' [alignment]='alignment' (onSubmitEvent)="ngOnInit()" *ngIf="isUserAllowed"></add-message-modal>
+</div>

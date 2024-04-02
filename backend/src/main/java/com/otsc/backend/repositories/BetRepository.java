@@ -11,6 +11,8 @@ public interface BetRepository extends JpaRepository<Bet, Long> {
 
     Optional<List<Bet>> findBetsByCreator(Long creator);
 
+    Optional<List<Bet>> findBetsByOpponentOrJudge(Long opponent, Long judge);
+
     Optional<List<Bet>> findBetsByOpponent(Long opponent);
 
     Optional<List<Bet>> findBetsByJudge(Long judge);

@@ -11,17 +11,34 @@ export class InnerContentComponent {
   constructor(private axiosService: AxiosService) { }
 
   challenges!: any;
-  waiting!: boolean;
+  challengesParticipating!: any;
+
+  waitingCreated!: boolean;
+  waitingPart!: boolean;
 
   ngOnInit(): void {
-    this.waiting = true;
+    this.waitingCreated = true;
+    this.waitingPart = true;
     this.axiosService.request(
       "GET",
       "/currentUserBets", {})
       .then(
         response => {
-          this.waiting = false;
+          this.waitingCreated = false;
           this.challenges = response.data;
+        }).catch(
+          error => {
+
+          }
+        );
+
+    this.axiosService.request(
+      "GET",
+      "/userParticipatingBets", {})
+      .then(
+        response => {
+          this.waitingPart = false;
+          this.challengesParticipating = response.data;
         }).catch(
           error => {
 

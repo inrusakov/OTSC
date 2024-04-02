@@ -10,8 +10,10 @@ import { AxiosService } from 'src/app/axios.service';
 })
 export class InnerContentChallengeObserver {
 
-  private betId: number | undefined;
+  betId!: number;
   private subscription: Subscription | undefined;
+  thisUserRole!: string;
+  isUserAllowed!: boolean;
 
   waiting!: boolean;
   item!: any;
@@ -27,6 +29,7 @@ export class InnerContentChallengeObserver {
   ngOnInit() {
     this.waiting = true;
     this.getBetById(this.betId)
+    this.userAllowedCheck(this.betId);
   }
 
   creatorId() {
@@ -57,13 +60,13 @@ export class InnerContentChallengeObserver {
     return date.join('-')
   }
 
-  getBetById(id: number | undefined) {
+  getBetById(id: number) {
     this.axiosService.request(
       "GET",
       "/getBetById?betId=" + id, {})
       .then(
         response => {
-          this.waiting = false;
+          
           this.item = response.data;
           this.setCreatorProfile(this.item.creator);
           if (this.item.opponent != null) {
@@ -114,6 +117,25 @@ export class InnerContentChallengeObserver {
       .then(
         response => {
           this.judgeProfile = response.data;
+        }).catch(
+          error => {
+          }
+        );
+  }
+
+  userAllowedCheck(id: number | undefined) {
+    this.axiosService.request(
+      "GET",
+      "/getRole?betId="+id, {})
+      .then(
+        response => {
+          this.waiting = false;
+          if(response.data === 'none'){
+            this.isUserAllowed = false;
+          } else {
+            this.isUserAllowed = true;
+          }
+          this.thisUserRole = response.data;
         }).catch(
           error => {
           }

@@ -12,3 +12,15 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_DB=OTSC
       - PGDATA=/var/lib/postgresql/data
+  mongo:
+    ports:
+      - '27017:27017'
+    container_name: mongo-files
+    restart: on-failure
+    logging:
+      options:
+        max-size: 1g
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongolog
+      - MONGO_INITDB_ROOT_PASSWORD=mongopas
+    image: mongo

@@ -11,7 +11,7 @@ export class AxiosService {
     axios.defaults.headers.post['Content-Type'] = 'application/json';
   }
 
-  checkAuth(): boolean{
+  checkAuth(): boolean {
     return window.localStorage.getItem("auth_token") === null ? false : true;
   }
 
@@ -27,19 +27,39 @@ export class AxiosService {
     }
   }
 
-
   request(method: string, url: string, data: any): Promise<any> {
-      let headers: any = {};
+    let headers: any = {};
 
-      if (this.getAuthToken() !== null) {
-          headers = {"Authorization": "Bearer " + this.getAuthToken()};
-      }
+    if (this.getAuthToken() !== null) {
+      headers = { "Authorization": "Bearer " + this.getAuthToken() };
+    }
 
-      return axios({
-          method: method,
-          url: url,
-          data: data,
-          headers: headers
-      });
+    return axios({
+      method: method,
+      url: url,
+      data: data,
+      headers: headers
+    });
   }
+
+  sendFile(method: string, url: string, data: any): Promise<any> {
+    let headers: any = {};
+
+    if (this.getAuthToken() !== null) {
+      headers = {
+        "Authorization": "Bearer " + this.getAuthToken(),
+        'Content-Type': 'multipart/form-data'
+      };
+    }
+
+    return axios({
+      method: method,
+      url: url,
+      data: data,
+      headers: headers
+    });
+  }
+
+
+
 }

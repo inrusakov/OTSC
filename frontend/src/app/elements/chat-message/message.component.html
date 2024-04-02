@@ -1,0 +1,20 @@
+<li class="chat-left" *ngIf="alignment === 'left'">
+    <div class="chat-avatar">
+        <img src="{{avatar}}" alt="Retail Admin">
+        <div class="chat-name">{{name}}</div>
+    </div>
+    <div class="chat-text">{{text}}
+        <image-view *ngIf="imageInMessage" [imageId]="imagePath"></image-view>
+    </div>
+    <div class="chat-hour">{{time}} <span class="fa fa-check-circle"></span></div>
+</li>
+<li class="chat-right" *ngIf="alignment === 'right'">
+    <div class="chat-hour">{{time}} <span class="fa fa-check-circle"></span></div>
+    <div class="chat-text">{{text}}
+        <image-view *ngIf="imageInMessage" [imageId]="imagePath"></image-view>
+    </div>
+    <div class="chat-avatar">
+        <img src="{{avatar}}" alt="Retail Admin">
+        <div class="chat-name">{{name}}</div>
+    </div>
+</li>

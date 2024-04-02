@@ -54,6 +54,15 @@ public class BetController {
         return ResponseEntity.ok(betService.getBetsByCreatorId(user.getId()));
     }
 
+    @GetMapping("/userParticipatingBets")
+    public ResponseEntity<List<BetDto>> userParticipatingBets() {
+        //TODO: Not final
+
+        UserDto principal = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDto user = userService.findByLogin(principal.getLogin());
+        return ResponseEntity.ok(betService.getBetsWhereUserParticipates(user.getId()));
+    }
+
     @PostMapping("/create")
     public ResponseEntity<BetDto> create(@RequestBody @Valid BetDto betDto) {
         //TODO: Not final
@@ -88,5 +97,12 @@ public class BetController {
         UserDto user = userService.findByLogin(principal.getLogin());
         BetDto bet = betService.resolveBet(betId, winner, user.getId());
         return ResponseEntity.ok(bet);
+    }
+
+    @GetMapping("/getRole")
+    public ResponseEntity<String> isUserAllowed(@RequestParam Long betId) {
+        UserDto principal = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDto user = userService.findByLogin(principal.getLogin());
+        return ResponseEntity.ok(betService.isUserAllowed(betId, user.getLogin()));
     }
 }
