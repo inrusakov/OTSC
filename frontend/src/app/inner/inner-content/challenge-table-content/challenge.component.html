@@ -1,11 +1,11 @@
-<div class="d-flex text-body-secondary pt-3 rounded">
+<div class="d-flex text-body-secondary pt-3 rounded justify-content-start">
   <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg"
     role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false">
-    <title>Placeholder</title>
+    <title>{{title}}</title>
     <rect width="100%" height="100%" attr.fill="{{color}}"></rect>
   </svg>
-  <h3 class="pb-3 mb-0 small lh-sm">
-    <strong class="d-block text-gray-dark">#{{id}} | {{title}}</strong>
-    {{description}}
-  </h3>
+  <h5 class="d-flex gap-2 justify-content-between">
+    <strong class="d-block text-gray-dark">#{{id}}</strong>
+    <h5 class="d-block text-gray-dark">| {{title}}</h5>
+  </h5>
 </div>

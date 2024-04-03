@@ -20,7 +20,7 @@ import { InnerContentComponent } from './inner/inner-content/inner-content.compo
 
 import { AxiosService } from './axios.service';
 import { InnerHeaderComponent } from './inner/header/inner-header.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { InnerContentChallenge } from './inner/inner-content/challenge-table-content/challenge.component';
 import { InnerChallengeModal } from './elements/challenge-create-modal/challenge-modal.component';
 import { InnerContentChallengeObserver } from './inner/inner-content/challenge-observer/challenge-observer.component';
@@ -46,7 +46,6 @@ import { MessageModal } from './elements/message-modal/message-modal.component';
     InnerAppComponent,
     InnerHeaderComponent,
     InnerContentComponent,
-    InnerContentChallenge,
     InnerContentChallengeObserver,
     InnerContentChallengeNotFound,
     ProfileParagraph,
@@ -63,6 +62,8 @@ import { MessageModal } from './elements/message-modal/message-modal.component';
     InnerProfileModal,
     NgbdAlertSelfclosing,
     MessageModal,
+    InnerContentChallenge,
+    NgbPaginationModule
   ],
   providers: [AxiosService, provideRouter(routes)],
   bootstrap: [AppComponent]

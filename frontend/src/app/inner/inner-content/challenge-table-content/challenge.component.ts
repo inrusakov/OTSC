@@ -1,14 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'inner-challenge',
   templateUrl: './challenge.component.html',
-  styleUrls: ['./challenge.component.css']
+  standalone: true,
+  styleUrls: ['./challenge.component.css'],
+  imports:[CommonModule]
 })
 export class InnerContentChallenge {
   @Input() id!: string;
   @Input() title!: string; 
-  @Input() description!: string;
   color!: string;
 
   ngOnInit(): void{

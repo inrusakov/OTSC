@@ -45,8 +45,8 @@ public class BetController {
         return ResponseEntity.ok(bets);
     }
 
-    @GetMapping("/currentUserBets")
-    public ResponseEntity<List<BetDto>> currentUserBets() {
+    @GetMapping("/myCreatedBets")
+    public ResponseEntity<List<BetDto>> myCreatedBets() {
         //TODO: Not final
 
         UserDto principal = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -54,13 +54,22 @@ public class BetController {
         return ResponseEntity.ok(betService.getBetsByCreatorId(user.getId()));
     }
 
-    @GetMapping("/userParticipatingBets")
-    public ResponseEntity<List<BetDto>> userParticipatingBets() {
+    @GetMapping("/myOpponentBets")
+    public ResponseEntity<List<BetDto>> myOpponentBets() {
         //TODO: Not final
 
         UserDto principal = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDto user = userService.findByLogin(principal.getLogin());
-        return ResponseEntity.ok(betService.getBetsWhereUserParticipates(user.getId()));
+        return ResponseEntity.ok(betService.getBetsByOpponentId(user.getId()));
+    }
+
+    @GetMapping("/myJudgeBets")
+    public ResponseEntity<List<BetDto>> myJudgeBets() {
+        //TODO: Not final
+
+        UserDto principal = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDto user = userService.findByLogin(principal.getLogin());
+        return ResponseEntity.ok(betService.getBetsByJudgeId(user.getId()));
     }
 
     @PostMapping("/create")

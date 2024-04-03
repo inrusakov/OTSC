@@ -87,14 +87,24 @@ public class BetService {
         return betMapper.toBetDtos(betRepository.findBetsByCreator(creatorId).orElse(null));
     }
 
-    public List<BetDto> getBetsWhereUserParticipates(Long userId) {
+    public List<BetDto> getBetsByOpponentId(Long opponentId) {
         //TODO: Not final
 
-        if (userRepository.findById(userId).isEmpty()) {
+        if (userRepository.findById(opponentId).isEmpty()) {
             throw new AppException("No user found", HttpStatus.NOT_FOUND);
         }
 
-        return betMapper.toBetDtos(betRepository.findBetsByOpponentOrJudge(userId, userId).orElse(null));
+        return betMapper.toBetDtos(betRepository.findBetsByOpponent(opponentId).orElse(null));
+    }
+
+    public List<BetDto> getBetsByJudgeId(Long judgeId) {
+        //TODO: Not final
+
+        if (userRepository.findById(judgeId).isEmpty()) {
+            throw new AppException("No user found", HttpStatus.NOT_FOUND);
+        }
+
+        return betMapper.toBetDtos(betRepository.findBetsByJudge(judgeId).orElse(null));
     }
 
     public List<BetDto> getAllBets() {
