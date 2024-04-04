@@ -1,0 +1,29 @@
+<button class="btn btn-success rounded-pill m-1" type="button" mdbRipple (click)="openLg(single)">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="12" y1="5" x2="12" y2="19"></line>
+    <line x1="5" y1="12" x2="19" y2="12"></line>
+  </svg>
+</button>
+
+<ng-template #single let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Enter opponent's login:</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="challengeForm" (ngSubmit)="onSubmit()">
+
+      <div class="mb-3">
+        <label for="login" class="form-label">Login: </label>
+        <input id="login" type="text" class="form-control" formControlName="login" required>
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit" [disabled]="!challengeForm.valid" class="btn btn-success"
+          (click)="modal.close('Close click')">Submit</button>
+      </div>
+
+    </form>
+  </div>
+</ng-template>

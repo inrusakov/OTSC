@@ -30,15 +30,11 @@ export class NgbdAlertSelfclosing {
 
 	staticAlertClosed = false;
 	successMessage = '';
-
-	@ViewChild('staticAlert', { static: false })
-  staticAlert!: NgbAlert;
+	
 	@ViewChild('selfClosingAlert', { static: false })
   selfClosingAlert!: NgbAlert;
 
 	constructor() {
-		setTimeout(() => this.staticAlert.close(), 20000);
-
 		this._message$
 			.pipe(
 				takeUntilDestroyed(),

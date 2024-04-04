@@ -113,16 +113,23 @@ public class BetService {
         return betMapper.toBetDtos(betRepository.findAll());
     }
 
-    public BetDto addOpponent(Long betId, Long opponentId) {
+    public BetDto addOpponent(Long betId, String opponent) {
         //TODO: Not final
 
         Optional<Bet> bet = betRepository.findBetById(betId);
         if (bet.isEmpty()) {
             throw new AppException("Bet not found", HttpStatus.NOT_FOUND);
         }
+        UserDto oppDto = userService.findByLogin(opponent);
         Bet updatedBet = bet.get();
-        if (userRepository.findById(opponentId).isPresent()) {
-            updatedBet.setOpponent(opponentId);
+        if (Objects.equals(updatedBet.getJudge(), oppDto.getId())){
+            throw new AppException("Opponent and judge cannot be same users", HttpStatus.BAD_REQUEST);
+        }
+        if (Objects.equals(updatedBet.getCreator(), oppDto.getId())){
+            throw new AppException("Opponent and creator cannot be same users", HttpStatus.BAD_REQUEST);
+        }
+        if (userRepository.findById(oppDto.getId()).isPresent()) {
+            updatedBet.setOpponent(oppDto.getId());
             betRepository.save(updatedBet);
         } else {
             throw new AppException("Opponent not found", HttpStatus.NOT_FOUND);
@@ -130,16 +137,23 @@ public class BetService {
         return betMapper.toBetDto(updatedBet);
     }
 
-    public BetDto addJudge(Long betId, Long judgeId) {
+    public BetDto addJudge(Long betId, String judge) {
         //TODO: Not final
 
         Optional<Bet> bet = betRepository.findBetById(betId);
         if (bet.isEmpty()) {
             throw new AppException("Bet not found", HttpStatus.NOT_FOUND);
         }
+        UserDto judgeDto = userService.findByLogin(judge);
         Bet updatedBet = bet.get();
-        if (userRepository.findById(judgeId).isPresent()) {
-            updatedBet.setJudge(judgeId);
+        if (Objects.equals(updatedBet.getOpponent(), judgeDto.getId())){
+            throw new AppException("Judge and opponent cannot be same users", HttpStatus.BAD_REQUEST);
+        }
+        if (Objects.equals(updatedBet.getCreator(), judgeDto.getId())){
+            throw new AppException("Judge and creator cannot be same users", HttpStatus.BAD_REQUEST);
+        }
+        if (userRepository.findById(judgeDto.getId()).isPresent()) {
+            updatedBet.setJudge(judgeDto.getId());
             betRepository.save(updatedBet);
         } else {
             throw new AppException("Judge not found", HttpStatus.NOT_FOUND);

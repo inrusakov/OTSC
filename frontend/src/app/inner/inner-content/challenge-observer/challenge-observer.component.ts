@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { AxiosService } from 'src/app/axios.service';
 
 @Component({
@@ -14,6 +14,9 @@ export class InnerContentChallengeObserver {
   private subscription: Subscription | undefined;
   thisUserRole!: string;
   isUserAllowed!: boolean;
+
+  onWrongOpponentLoginError: Subject<void> = new Subject<void>();
+  onWrongJudgeLoginError: Subject<void> = new Subject<void>();
 
   waiting!: boolean;
   item!: any;
@@ -140,6 +143,14 @@ export class InnerContentChallengeObserver {
           error => {
           }
         );
+  }
+
+  showOpponentAlert(){
+    this.onWrongOpponentLoginError.next();
+  }
+
+  showJudgeAlert(){
+    this.onWrongJudgeLoginError.next();
   }
 
 }

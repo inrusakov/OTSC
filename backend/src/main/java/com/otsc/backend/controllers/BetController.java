@@ -83,18 +83,18 @@ public class BetController {
     }
 
     @PostMapping("/setOpponent")
-    public ResponseEntity<BetDto> setOpponent(@RequestParam Long betId, @RequestParam Long opponentId) {
+    public ResponseEntity<BetDto> setOpponent(@RequestParam Long betId, @RequestParam String opponent) {
         //TODO: Not final
 
-        BetDto bet = betService.addOpponent(betId, opponentId);
+        BetDto bet = betService.addOpponent(betId, opponent);
         return ResponseEntity.ok(bet);
     }
 
     @PostMapping("/setJudge")
-    public ResponseEntity<BetDto> setJudge(@RequestParam Long betId, @RequestParam Long judgeId) {
+    public ResponseEntity<BetDto> setJudge(@RequestParam Long betId, @RequestParam String judge) {
         //TODO: Not final
 
-        BetDto bet = betService.addJudge(betId, judgeId);
+        BetDto bet = betService.addJudge(betId, judge);
         return ResponseEntity.ok(bet);
     }
 

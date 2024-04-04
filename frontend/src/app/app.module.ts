@@ -32,6 +32,8 @@ import { ImageView } from './elements/image-view/image-view.component';
 import { Chat } from './elements/chat/chat.component';
 import { ChatMessage } from './elements/chat-message/message.component';
 import { MessageModal } from './elements/message-modal/message-modal.component';
+import { AddOpponentModal } from './elements/add-opponent-modal/add-opp-modal.component';
+import { AddJudgeModal } from './elements/add-judge-modal/add-judge-modal.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { MessageModal } from './elements/message-modal/message-modal.component';
     ProfileParagraph,
     ImageView,
     Chat,
-    ChatMessage
+    ChatMessage,
+    
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,9 @@ import { MessageModal } from './elements/message-modal/message-modal.component';
     NgbdAlertSelfclosing,
     MessageModal,
     InnerContentChallenge,
-    NgbPaginationModule
+    NgbPaginationModule,
+    AddOpponentModal,
+    AddJudgeModal
   ],
   providers: [AxiosService, provideRouter(routes)],
   bootstrap: [AppComponent]
