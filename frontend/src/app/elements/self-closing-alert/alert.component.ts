@@ -13,26 +13,26 @@ import { CommonModule } from '@angular/common';
 })
 export class NgbdAlertSelfclosing {
 
-  private eventsSubscription!: Subscription;
-  @Input() events!: Observable<void>;
-  @Input() message!: string;
-  @Input() type!: string;
+	private eventsSubscription!: Subscription;
+	@Input() events!: Observable<void>;
+	@Input() message!: string;
+	@Input() type!: string;
 
-  ngOnInit(){
-    this.eventsSubscription = this.events.subscribe(() => this.changeSuccessMessage());
-  }
-  
-  ngOnDestroy() {
-    this.eventsSubscription.unsubscribe();
-  }
+	ngOnInit() {
+		this.eventsSubscription = this.events.subscribe(() => this.changeSuccessMessage());
+	}
+
+	ngOnDestroy() {
+		this.eventsSubscription.unsubscribe();
+	}
 
 	private _message$ = new Subject<string>();
 
 	staticAlertClosed = false;
 	successMessage = '';
-	
+
 	@ViewChild('selfClosingAlert', { static: false })
-  selfClosingAlert!: NgbAlert;
+	selfClosingAlert!: NgbAlert;
 
 	constructor() {
 		this._message$

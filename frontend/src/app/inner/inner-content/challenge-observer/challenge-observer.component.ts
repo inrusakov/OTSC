@@ -17,6 +17,7 @@ export class InnerContentChallengeObserver {
 
   onWrongOpponentLoginError: Subject<void> = new Subject<void>();
   onWrongJudgeLoginError: Subject<void> = new Subject<void>();
+  onWrongResolveError: Subject<void> = new Subject<void>();
 
   waiting!: boolean;
   item!: any;
@@ -54,6 +55,37 @@ export class InnerContentChallengeObserver {
   judgeId() {
     if (this.judgeProfile != null) {
       return true;
+    } else {
+      return false;
+    }
+  }
+
+  isResolved(){
+    if(this.item.winner != null){
+      return true;
+    }
+    return false;
+  }
+
+  ifCreatorWinner(){
+    if(this.creatorId()){
+      if(this.item.winner === this.creatorProfile.id){
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  ifOpponentWinner(){
+    if(this.opponentId()){
+      if(this.item.winner === this.opponentProfile.id){
+        return true;
+      } else {
+        return false;
+      }
     } else {
       return false;
     }
@@ -151,6 +183,10 @@ export class InnerContentChallengeObserver {
 
   showJudgeAlert(){
     this.onWrongJudgeLoginError.next();
+  }
+
+  showResolveAlert(){
+    this.onWrongResolveError.next();
   }
 
 }

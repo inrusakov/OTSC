@@ -177,7 +177,7 @@ public class BetService {
         if (!bet.get().getJudge().equals(currentOp)) {
             throw new AppException("User not allowed to resolve bet", HttpStatus.FORBIDDEN);
         }
-        if (!bet.get().getWinner().equals(0L)) {
+        if (bet.get().getWinner() != null) {
             throw new AppException("Bet already resolved", HttpStatus.FORBIDDEN);
         }
 

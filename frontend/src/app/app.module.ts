@@ -34,6 +34,7 @@ import { ChatMessage } from './elements/chat-message/message.component';
 import { MessageModal } from './elements/message-modal/message-modal.component';
 import { AddOpponentModal } from './elements/add-opponent-modal/add-opp-modal.component';
 import { AddJudgeModal } from './elements/add-judge-modal/add-judge-modal.component';
+import { ResolveChallengeModal } from './elements/resolve-challenge-modal/resolve-modal.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { AddJudgeModal } from './elements/add-judge-modal/add-judge-modal.compon
     InnerContentChallenge,
     NgbPaginationModule,
     AddOpponentModal,
-    AddJudgeModal
+    AddJudgeModal,
+    ResolveChallengeModal
   ],
   providers: [AxiosService, provideRouter(routes)],
   bootstrap: [AppComponent]
