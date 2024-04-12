@@ -20,7 +20,7 @@ export class MessageModal {
   preview = '';
   uploadedFile!: string;
 
-  @Input() betId!: number;
+  @Input() betId!: string;
   @Input() alignment!: string;
   @Output() onSubmitEvent = new EventEmitter();
 

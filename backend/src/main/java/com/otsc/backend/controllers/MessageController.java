@@ -23,7 +23,7 @@ public class MessageController {
     private final UserService userService;
 
     @GetMapping("/getChat")
-    public ResponseEntity<List<MessageDto>> getChatByBetId(@RequestParam Long betId) {
+    public ResponseEntity<List<MessageDto>> getChatByBetId(@RequestParam String betId) {
         List<MessageDto> chatByBetId = messageService.getChatByBetId(betId);
         return ResponseEntity.ok(chatByBetId);
     }

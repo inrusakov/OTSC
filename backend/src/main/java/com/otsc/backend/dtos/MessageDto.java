@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class MessageDto {
-    private Long id;
-    private Long betId;
+    private String id;
+    private String betId;
     private String alignment;
     private String avatar;
     private String name;

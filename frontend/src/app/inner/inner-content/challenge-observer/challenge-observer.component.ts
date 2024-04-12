@@ -10,7 +10,7 @@ import { AxiosService } from 'src/app/axios.service';
 })
 export class InnerContentChallengeObserver {
 
-  betId!: number;
+  betId!: string;
   private subscription: Subscription | undefined;
   thisUserRole!: string;
   isUserAllowed!: boolean;
@@ -95,7 +95,7 @@ export class InnerContentChallengeObserver {
     return date.join('-')
   }
 
-  getBetById(id: number) {
+  getBetById(id: string) {
     this.axiosService.request(
       "GET",
       "/getBetById?betId=" + id, {})
@@ -119,7 +119,7 @@ export class InnerContentChallengeObserver {
         );
   }
 
-  setCreatorProfile(id: number | undefined) {
+  setCreatorProfile(id: string | undefined) {
     this.axiosService.request(
       "GET",
       "/getProfileById?userId=" + id, {})
@@ -132,7 +132,7 @@ export class InnerContentChallengeObserver {
         );
   }
 
-  setOpponentProfile(id: number | undefined) {
+  setOpponentProfile(id: string | undefined) {
     this.axiosService.request(
       "GET",
       "/getProfileById?userId=" + id, {})
@@ -145,7 +145,7 @@ export class InnerContentChallengeObserver {
         );
   }
 
-  setJudgeProfile(id: number | undefined) {
+  setJudgeProfile(id: string | undefined) {
     this.axiosService.request(
       "GET",
       "/getProfileById?userId=" + id, {})
@@ -158,7 +158,7 @@ export class InnerContentChallengeObserver {
         );
   }
 
-  userAllowedCheck(id: number | undefined) {
+  userAllowedCheck(id: string | undefined) {
     this.axiosService.request(
       "GET",
       "/getRole?betId="+id, {})

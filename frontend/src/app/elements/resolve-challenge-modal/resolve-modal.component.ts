@@ -17,7 +17,7 @@ export class ResolveChallengeModal {
   @Output() onSubmitEvent = new EventEmitter();
   @Output() onErrorEvent = new EventEmitter();
 
-  @Input() betId!: number;
+  @Input() betId!: string;
   @Input() challenge!: any;
   @Input() creatorProfile!: any;
   @Input() opponentProfile!: any;

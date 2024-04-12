@@ -13,12 +13,12 @@ import java.time.LocalDate;
 @Builder
 public class BetDto {
 
-    private Long id;
-    private Long creator;
+    private String id;
+    private String creator;
     private String title;
     private String description;
     private LocalDate date;
-    private Long opponent;
-    private Long judge;
-    private Long winner;
+    private String opponent;
+    private String judge;
+    private String winner;
 }

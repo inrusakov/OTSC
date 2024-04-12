@@ -24,7 +24,7 @@ public class MessageService {
     private final UserService userService;
     private final BetService betService;
 
-    public List<MessageDto> getChatByBetId(Long betId) {
+    public List<MessageDto> getChatByBetId(String betId) {
         if (!betService.isBetPresent(betId)) {
             throw new AppException("Bet not found", HttpStatus.BAD_REQUEST);
         }

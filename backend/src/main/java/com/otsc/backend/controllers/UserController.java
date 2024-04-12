@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @GetMapping("/getProfileById")
-    public ResponseEntity<ProfileDto> getProfileById(@RequestParam Long userId) {
+    public ResponseEntity<ProfileDto> getProfileById(@RequestParam String userId) {
         ProfileDto updatedProfile = userService.getProfileById(userId);
         return ResponseEntity.ok(updatedProfile);
     }

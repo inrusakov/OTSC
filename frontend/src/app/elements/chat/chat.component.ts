@@ -7,7 +7,7 @@ import { AxiosService } from 'src/app/axios.service';
   styleUrls: ['./chat.component.css']
 })
 export class Chat {
-  @Input() betId!: number;
+  @Input() betId!: string;
   @Input() thisUserRole!: string;
   @Input() isUserAllowed!: boolean;
 
@@ -44,7 +44,7 @@ export class Chat {
     }
   }
 
-  getChatByBetId(betId: number) {
+  getChatByBetId(betId: string) {
     this.axiosService.request(
       "GET",
       "/getChat?betId=" + betId, {})

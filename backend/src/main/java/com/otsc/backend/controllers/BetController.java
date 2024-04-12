@@ -31,14 +31,14 @@ public class BetController {
     }
 
     @GetMapping("/getBetById")
-    public ResponseEntity<BetDto> getBetById(@RequestParam Long betId) {
+    public ResponseEntity<BetDto> getBetById(@RequestParam String betId) {
         //TODO: Not final
 
         return ResponseEntity.ok(betService.getBetById(betId));
     }
 
     @GetMapping("/betsByCreatorId")
-    public ResponseEntity<List<BetDto>> betsByCreatorId(@RequestParam Long userId) {
+    public ResponseEntity<List<BetDto>> betsByCreatorId(@RequestParam String userId) {
         //TODO: Not final
 
         List<BetDto> bets = betService.getBetsByCreatorId(userId);
@@ -83,7 +83,7 @@ public class BetController {
     }
 
     @PostMapping("/setOpponent")
-    public ResponseEntity<BetDto> setOpponent(@RequestParam Long betId, @RequestParam String opponent) {
+    public ResponseEntity<BetDto> setOpponent(@RequestParam String betId, @RequestParam String opponent) {
         //TODO: Not final
 
         BetDto bet = betService.addOpponent(betId, opponent);
@@ -91,7 +91,7 @@ public class BetController {
     }
 
     @PostMapping("/setJudge")
-    public ResponseEntity<BetDto> setJudge(@RequestParam Long betId, @RequestParam String judge) {
+    public ResponseEntity<BetDto> setJudge(@RequestParam String betId, @RequestParam String judge) {
         //TODO: Not final
 
         BetDto bet = betService.addJudge(betId, judge);
@@ -99,7 +99,7 @@ public class BetController {
     }
 
     @PostMapping("/resolve")
-    public ResponseEntity<BetDto> resolve(@RequestParam Long betId, @RequestParam Long winner) {
+    public ResponseEntity<BetDto> resolve(@RequestParam String betId, @RequestParam String winner) {
         //TODO: Not final
 
         UserDto principal = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -109,7 +109,7 @@ public class BetController {
     }
 
     @GetMapping("/getRole")
-    public ResponseEntity<String> isUserAllowed(@RequestParam Long betId) {
+    public ResponseEntity<String> isUserAllowed(@RequestParam String betId) {
         UserDto principal = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDto user = userService.findByLogin(principal.getLogin());
         return ResponseEntity.ok(betService.isUserAllowed(betId, user.getLogin()));

@@ -1,6 +1,8 @@
 package com.otsc.backend.entities;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +21,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Photo {
 
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     private String title;

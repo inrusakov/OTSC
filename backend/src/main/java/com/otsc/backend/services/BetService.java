@@ -29,11 +29,11 @@ public class BetService {
     public static final String ROLE_OPPONENT = "opponent";
     public static final String ROLE_JUDGE = "judge";
 
-    public boolean isBetPresent(Long betId) {
+    public boolean isBetPresent(String betId) {
         return betRepository.findById(betId).isPresent();
     }
 
-    public String isUserAllowed(Long betId, String login){
+    public String isUserAllowed(String betId, String login){
         if(!isBetPresent(betId)){
             return ROLE_NONE;
         }
@@ -42,9 +42,9 @@ public class BetService {
         }
 
         BetDto bet = getBetById(betId);
-        Long creatorId = bet.getCreator();
-        Long opponentId = bet.getOpponent();
-        Long judgeId = bet.getJudge();
+        String creatorId = bet.getCreator();
+        String opponentId = bet.getOpponent();
+        String judgeId = bet.getJudge();
         UserDto userDto = userService.findByLogin(login);
         if (Objects.equals(userDto.getId(), creatorId)){
             return ROLE_CREATOR;
@@ -57,7 +57,7 @@ public class BetService {
         }
     }
 
-    public BetDto createBet(BetDto betDto, Long creatorId) {
+    public BetDto createBet(BetDto betDto, String creatorId) {
         //TODO: Not final
 
         betDto.setCreator(creatorId);
@@ -67,7 +67,7 @@ public class BetService {
         return betMapper.toBetDto(bet);
     }
 
-    public BetDto getBetById(Long betId) {
+    public BetDto getBetById(String betId) {
         //TODO: Not final
 
         if (betRepository.findById(betId).isEmpty()) {
@@ -77,7 +77,7 @@ public class BetService {
         return betMapper.toBetDto(betRepository.findBetById(betId).orElse(null));
     }
 
-    public List<BetDto> getBetsByCreatorId(Long creatorId) {
+    public List<BetDto> getBetsByCreatorId(String creatorId) {
         //TODO: Not final
 
         if (userRepository.findById(creatorId).isEmpty()) {
@@ -87,7 +87,7 @@ public class BetService {
         return betMapper.toBetDtos(betRepository.findBetsByCreator(creatorId).orElse(null));
     }
 
-    public List<BetDto> getBetsByOpponentId(Long opponentId) {
+    public List<BetDto> getBetsByOpponentId(String opponentId) {
         //TODO: Not final
 
         if (userRepository.findById(opponentId).isEmpty()) {
@@ -97,7 +97,7 @@ public class BetService {
         return betMapper.toBetDtos(betRepository.findBetsByOpponent(opponentId).orElse(null));
     }
 
-    public List<BetDto> getBetsByJudgeId(Long judgeId) {
+    public List<BetDto> getBetsByJudgeId(String judgeId) {
         //TODO: Not final
 
         if (userRepository.findById(judgeId).isEmpty()) {
@@ -113,7 +113,7 @@ public class BetService {
         return betMapper.toBetDtos(betRepository.findAll());
     }
 
-    public BetDto addOpponent(Long betId, String opponent) {
+    public BetDto addOpponent(String betId, String opponent) {
         //TODO: Not final
 
         Optional<Bet> bet = betRepository.findBetById(betId);
@@ -137,7 +137,7 @@ public class BetService {
         return betMapper.toBetDto(updatedBet);
     }
 
-    public BetDto addJudge(Long betId, String judge) {
+    public BetDto addJudge(String betId, String judge) {
         //TODO: Not final
 
         Optional<Bet> bet = betRepository.findBetById(betId);
@@ -161,7 +161,7 @@ public class BetService {
         return betMapper.toBetDto(updatedBet);
     }
 
-    public BetDto resolveBet(Long betId, Long winner, Long currentOp) {
+    public BetDto resolveBet(String betId, String winner, String currentOp) {
         //TODO: Not final
 
         Optional<Bet> bet = betRepository.findBetById(betId);

@@ -15,7 +15,7 @@ import { AxiosService } from 'src/app/axios.service';
 export class AddJudgeModal {
   @Output() onSubmitEvent = new EventEmitter();
   @Output() onErrorEvent = new EventEmitter();
-  @Input() betId!: number;
+  @Input() betId!: string;
 
   constructor(private formBuilder: FormBuilder, private axiosService: AxiosService, private router: Router) { }
 

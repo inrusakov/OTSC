@@ -10,7 +10,8 @@ import { Component, Input } from '@angular/core';
 })
 export class InnerContentChallenge {
   @Input() id!: string;
-  @Input() title!: string; 
+  @Input() title!: string;
+  @Input() date!: any; 
   color!: string;
 
   ngOnInit(): void{
@@ -25,5 +26,9 @@ export class InnerContentChallenge {
     }
     return '#' + result;
   };
+
+  getDate(date: any) {
+    return date.join('-')
+  }
   
 }

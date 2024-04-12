@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDate;
 
@@ -21,11 +22,11 @@ import java.time.LocalDate;
 @Table(name = "app_bet")
 public class Bet {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
     @Column(name = "creator")
-    private Long creator;
+    private String creator;
 
     @Column(name = "title", columnDefinition = "TEXT")
     private String title;
@@ -37,12 +38,12 @@ public class Bet {
     private LocalDate date;
 
     @Column(name = "opponent")
-    private Long opponent;
+    private String opponent;
 
     @Column(name = "judge")
-    private Long judge;
+    private String judge;
 
     @Column(name = "winner")
-    private Long winner;
+    private String winner;
 
 }

@@ -35,6 +35,7 @@ import { MessageModal } from './elements/message-modal/message-modal.component';
 import { AddOpponentModal } from './elements/add-opponent-modal/add-opp-modal.component';
 import { AddJudgeModal } from './elements/add-judge-modal/add-judge-modal.component';
 import { ResolveChallengeModal } from './elements/resolve-challenge-modal/resolve-modal.component';
+import { CopyButton } from './elements/copy-button/copy-button.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { ResolveChallengeModal } from './elements/resolve-challenge-modal/resolv
     NgbPaginationModule,
     AddOpponentModal,
     AddJudgeModal,
-    ResolveChallengeModal
+    ResolveChallengeModal,
+    CopyButton
   ],
   providers: [AxiosService, provideRouter(routes)],
   bootstrap: [AppComponent]

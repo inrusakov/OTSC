@@ -21,11 +21,11 @@ import java.sql.Date;
 @Table(name = "app_messages")
 public class Message {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
     @Column(name = "bet_id",nullable = false)
-    private Long betId;
+    private String betId;
 
     @Column(name = "alignment",nullable = false)
     private String alignment;

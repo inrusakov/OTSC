@@ -11,6 +11,7 @@
     <resolve-modal *ngIf="creatorId() && opponentId() && (thisUserRole === 'judge') && !isResolved()" [challenge]="item"
       [betId]="betId" [creatorProfile]="creatorProfile" [opponentProfile]="opponentProfile" (onSubmitEvent)="ngOnInit()"
       (onErrorEvent)="showResolveAlert()"></resolve-modal>
+    <copy-button></copy-button>
   </nav>
 
   <ngbd-alert-selfclosing [type]="'danger'" [message]="'Incorrect opponent login'"
@@ -22,9 +23,6 @@
 
   <div class="my-3 p-3 bg-body rounded shadow-sm" *ngIf="!waiting">
     <div class="p-3 text-center bg-body-tertiary rounded-3">
-      <p class="col-lg-8 mx-auto fs-5 text-muted">
-        #{{betId}}
-      </p>
       <h1 class="text-body-emphasis">{{item.title}}</h1>
       <p class="col-lg-8 mx-auto fs-5 text-muted">
         {{item.description}}
