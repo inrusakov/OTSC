@@ -109,4 +109,14 @@ public class UserService {
         return userMapper.toUserDto(savedUser);
     }
 
+    public ProfileDto changeAvatar(String login, String avatar) {
+        User user = userRepository.findByLogin(login)
+                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+        if (avatar != null) {
+            user.setAvatar(avatar);
+        }
+        userRepository.save(user);
+        return userMapper.userToProfileDto(user);
+    }
+
 }

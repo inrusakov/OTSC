@@ -26,6 +26,9 @@ export class InnerProfileModal {
   lastName!: string;
   status!: string;
 
+  onAvatarSubmited: Subject<void> = new Subject<void>();
+  activeAvatar!: string;
+
   constructor(private formBuilder: FormBuilder, private axiosService: AxiosService, private router: Router) { }
 
   ngOnInit(): void {
@@ -102,6 +105,60 @@ export class InnerProfileModal {
             this.onPassError.next();
           }
         );
+  }
+
+  challengeForm = this.formBuilder.group({
+    KikiCheck: [false],
+    MaxCheck: [false],
+    ScooterCheck: [false],
+    CleoCheck: [false]
+  });
+
+  onChangeAvatar() {
+    this.axiosService.request(
+      "PUT",
+      "/avatar", {
+      avatar: this.activeAvatar
+    })
+      .then(
+        response => {
+          this.onAvatarSubmited.next();
+        }).catch(
+          error => {
+          }
+        );
+  }
+
+  onKikiCheckChange($event: any) {
+    if (this.challengeForm.value.MaxCheck || this.challengeForm.value.ScooterCheck || this.challengeForm.value.CleoCheck) {
+      this.challengeForm.setValue({ KikiCheck: true, MaxCheck: false, ScooterCheck: false, CleoCheck: false })
+    }
+    this.activeAvatar = 'https://api.dicebear.com/8.x/notionists/svg?seed=Kiki';
+  }
+
+  onMaxCheckChange($event: any) {
+    if (this.challengeForm.value.KikiCheck || this.challengeForm.value.ScooterCheck || this.challengeForm.value.CleoCheck) {
+      this.challengeForm.setValue({ KikiCheck: false, MaxCheck: true, ScooterCheck: false, CleoCheck: false })
+    }
+    this.activeAvatar = 'https://api.dicebear.com/8.x/notionists/svg?seed=Max';
+  }
+
+  onScooterCheckChange($event: any) {
+    if (this.challengeForm.value.KikiCheck || this.challengeForm.value.MaxCheck || this.challengeForm.value.CleoCheck) {
+      this.challengeForm.setValue({ KikiCheck: false, MaxCheck: false, ScooterCheck: true, CleoCheck: false })
+    }
+    this.activeAvatar = 'https://api.dicebear.com/8.x/notionists/svg?seed=Scooter';
+  }
+
+  onCleoCheckChange($event: any) {
+    if (this.challengeForm.value.KikiCheck || this.challengeForm.value.MaxCheck || this.challengeForm.value.ScooterCheck) {
+      this.challengeForm.setValue({ KikiCheck: false, MaxCheck: false, ScooterCheck: false, CleoCheck: true })
+    }
+    this.activeAvatar = 'https://api.dicebear.com/8.x/notionists/svg?seed=Cleo';
+  }
+
+  ifFormValid() {
+    return this.challengeForm.value.KikiCheck || this.challengeForm.value.MaxCheck || this.challengeForm.value.ScooterCheck || this.challengeForm.value.CleoCheck;
   }
 
 }

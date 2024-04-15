@@ -1,5 +1,6 @@
 package com.otsc.backend.controllers;
 
+import com.otsc.backend.dtos.AvatarDto;
 import com.otsc.backend.dtos.CredentialChangeDto;
 import com.otsc.backend.dtos.ProfileDto;
 import com.otsc.backend.dtos.UserDto;
@@ -26,6 +27,13 @@ public class UserController {
     public ResponseEntity<ProfileDto> updateProfile(@RequestBody @Valid ProfileDto profileDto) {
         UserDto principal = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         ProfileDto updatedProfile = userService.changeProfileInfo(principal.getLogin(), profileDto);
+        return ResponseEntity.ok(updatedProfile);
+    }
+
+    @PutMapping("/avatar")
+    public ResponseEntity<ProfileDto> updateAvatar(@RequestBody AvatarDto avatar) {
+        UserDto principal = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        ProfileDto updatedProfile = userService.changeAvatar(principal.getLogin(), avatar.avatar());
         return ResponseEntity.ok(updatedProfile);
     }
 

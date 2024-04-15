@@ -8,7 +8,7 @@
     <h5 class="m-2 flex-grow-1 border-bottom pb-2 mb-0">Creator:</h5>
     <ngb-pagination [(page)]="page" [pageSize]="pageSize" [maxSize]="maxSize"
       [collectionSize]="challengesCreated.length" (pageChange)='updateStartAndEnd()'
-      *ngIf="createdEmpty || challengesCreated.length > pageSize">
+      *ngIf="challengesCreated.length > pageSize">
     </ngb-pagination>
   </div>
 
@@ -30,7 +30,7 @@
     <h5 class="m-2 flex-grow-1 border-bottom pb-2 mb-0">Opponent:</h5>
     <ngb-pagination [(page)]="page" [pageSize]="pageSize" [maxSize]="maxSize"
     [collectionSize]="challengesOpponent.length" (pageChange)='updateStartAndEnd()'
-    *ngIf="createdEmpty || challengesOpponent.length > pageSize">
+    *ngIf="challengesOpponent.length > pageSize">
     </ngb-pagination>
   </div>
   <div *ngFor="let item of challengesOpponent" class="row">
@@ -50,7 +50,7 @@
     <h5 class="m-2 flex-grow-1 border-bottom pb-2 mb-0">Judge:</h5>
     <ngb-pagination [(page)]="page" [pageSize]="pageSize" [maxSize]="maxSize"
     [collectionSize]="challengesJudge.length" (pageChange)='updateStartAndEnd()'
-    *ngIf="createdEmpty || challengesJudge.length > pageSize">
+    *ngIf="challengesJudge.length > pageSize">
     </ngb-pagination>
   </div>
   <div *ngFor="let item of challengesJudge" class="row">

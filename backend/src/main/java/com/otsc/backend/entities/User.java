@@ -36,6 +36,10 @@ public class User {
     @Size(max = 100)
     private String status;
 
+    @Column(name = "avatar")
+    @Size(max = 100)
+    private String avatar;
+
     @Column(nullable = false)
     @Size(max = 100)
     private String login;

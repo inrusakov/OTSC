@@ -36,6 +36,7 @@ import { AddOpponentModal } from './elements/add-opponent-modal/add-opp-modal.co
 import { AddJudgeModal } from './elements/add-judge-modal/add-judge-modal.component';
 import { ResolveChallengeModal } from './elements/resolve-challenge-modal/resolve-modal.component';
 import { CopyButton } from './elements/copy-button/copy-button.component';
+import { AvatarComponent } from './elements/avatar/avatar.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import { CopyButton } from './elements/copy-button/copy-button.component';
     ImageView,
     Chat,
     ChatMessage,
-    
+    AvatarComponent
   ],
   imports: [
     BrowserModule,
