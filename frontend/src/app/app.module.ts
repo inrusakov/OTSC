@@ -37,6 +37,7 @@ import { AddJudgeModal } from './elements/add-judge-modal/add-judge-modal.compon
 import { ResolveChallengeModal } from './elements/resolve-challenge-modal/resolve-modal.component';
 import { CopyButton } from './elements/copy-button/copy-button.component';
 import { AvatarComponent } from './elements/avatar/avatar.component';
+import { HistoryComponent } from './inner/inner-content/challenge-history/challenge-history.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { AvatarComponent } from './elements/avatar/avatar.component';
     ImageView,
     Chat,
     ChatMessage,
-    AvatarComponent
+    AvatarComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,

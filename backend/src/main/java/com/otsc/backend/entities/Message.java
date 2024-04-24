@@ -24,27 +24,28 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(name = "bet_id",nullable = false)
+    @Column(name = "bet_id", nullable = false)
     private String betId;
 
-    @Column(name = "alignment",nullable = false)
+    @Column(name = "alignment", nullable = false)
     private String alignment;
 
-    @Column(name = "avatar",nullable = false)
+    @Column(name = "avatar")
     private String avatar;
 
-    @Column(name = "name",nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "text",nullable = false)
+    @Column(name = "text", nullable = false)
     private String text;
 
-    @Column(name = "image_in_message",nullable = false)
+    @Column(name = "image_in_message", nullable = false)
     private boolean imageInMessage;
 
-    @Column(name = "image_path", nullable = true)
+    @Column(name = "image_path")
     private String imagePath;
 
-    @Column(name = "time",nullable = false)
+    @Column(name = "time", nullable = false)
     private String time;
+
 }

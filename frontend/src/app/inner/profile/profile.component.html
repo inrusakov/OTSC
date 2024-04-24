@@ -146,7 +146,7 @@
               <button type="submit" class="btn btn-primary m-2"
                 [disabled]="!securityUpdateForm.valid || !(securityUpdateForm.value.newPass === securityUpdateForm.value.newPass2)"
                 *ngIf="!waiting">
-                Update Profile
+                Update Password
               </button>
 
               <div class="spinner-border m-2" role="status" *ngIf="waiting">

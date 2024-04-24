@@ -47,8 +47,6 @@ public class BetController {
 
     @GetMapping("/myCreatedBets")
     public ResponseEntity<List<BetDto>> myCreatedBets() {
-        //TODO: Not final
-
         UserDto principal = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDto user = userService.findByLogin(principal.getLogin());
         return ResponseEntity.ok(betService.getBetsByCreatorId(user.getId()));
@@ -113,5 +111,12 @@ public class BetController {
         UserDto principal = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDto user = userService.findByLogin(principal.getLogin());
         return ResponseEntity.ok(betService.isUserAllowed(betId, user.getLogin()));
+    }
+
+    @GetMapping("/history")
+    public ResponseEntity<List<BetDto>> getHistory() {
+        UserDto principal = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDto user = userService.findByLogin(principal.getLogin());
+        return ResponseEntity.ok(betService.getResolvedBets(user.getLogin()));
     }
 }

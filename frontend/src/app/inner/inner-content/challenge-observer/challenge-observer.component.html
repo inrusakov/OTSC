@@ -8,7 +8,7 @@
       </svg>
       Back
     </button>
-    <resolve-modal *ngIf="creatorId() && opponentId() && (thisUserRole === 'judge') && !isResolved()" [challenge]="item"
+    <resolve-modal class="px-3" *ngIf="creatorId() && opponentId() && (thisUserRole === 'judge') && !isResolved()" [challenge]="item"
       [betId]="betId" [creatorProfile]="creatorProfile" [opponentProfile]="opponentProfile" (onSubmitEvent)="ngOnInit()"
       (onErrorEvent)="showResolveAlert()"></resolve-modal>
     <copy-button></copy-button>

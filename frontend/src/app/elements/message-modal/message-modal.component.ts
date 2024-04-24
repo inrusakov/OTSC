@@ -92,7 +92,7 @@ export class MessageModal {
                 {
                   betId: this.betId,
                   alignment: this.alignment,
-                  avatar: 'https://www.bootdey.com/img/Content/avatar/avatar1.png',
+                  avatar: 'link',
                   text: this.messageForm.value.text,
                   imageInMessage: true,
                   imagePath: this.uploadedFile,
@@ -126,7 +126,7 @@ export class MessageModal {
         {
           betId: this.betId,
           alignment: this.alignment,
-          avatar: 'https://www.bootdey.com/img/Content/avatar/avatar1.png',
+          avatar: 'link',
           text: this.messageForm.value.text,
           imageInMessage: false,
           imagePath: 'null',

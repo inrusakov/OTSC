@@ -6,6 +6,7 @@ import { InnerContentChallengeObserver } from './inner/inner-content/challenge-o
 import { InnerContentComponent } from './inner/inner-content/inner-content.component';
 import { InnerProfileModal } from './inner/profile/profile.component';
 import { InnerContentChallengeNotFound } from './inner/inner-content/challenge-404/challenge-404.component';
+import { HistoryComponent } from './inner/inner-content/challenge-history/challenge-history.component';
 
 export const routes: Routes = [
   { path: '', component: ContentComponent },
@@ -20,7 +21,12 @@ export const routes: Routes = [
       {
         path: '404',
         component: InnerContentChallengeNotFound,
-      },{
+      },
+      {
+        path: 'history',
+        component: HistoryComponent,
+      },
+      {
         path: 'challenge/:id',
         component: InnerContentChallengeObserver,
       },

@@ -30,6 +30,7 @@ public class MessageService {
         }
 
         List<Message> messages = messageRepository.findAllByBetIdOrderByIdAsc(betId);
+        messages = updateAvatars(messages);
         return messageMapper.messagesToMessageDtos(messages);
     }
 
@@ -46,6 +47,17 @@ public class MessageService {
         Message message = messageMapper.messageDtoToMessage(messageDto);
         messageRepository.save(message);
         return messageDto;
+    }
+
+    public List<Message> updateAvatars(List<Message> messages){
+        for (Message message : messages) {
+            UserDto userDto = userService.findByLogin(message.getName());
+            if (!message.getAvatar().equals(userDto.getAvatar())){
+                message.setAvatar(userDto.getAvatar());
+                messageRepository.save(message);
+            }
+        }
+        return messages;
     }
 
 }

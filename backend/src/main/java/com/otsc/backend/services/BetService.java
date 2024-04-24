@@ -3,6 +3,7 @@ package com.otsc.backend.services;
 import com.otsc.backend.dtos.BetDto;
 import com.otsc.backend.dtos.UserDto;
 import com.otsc.backend.entities.Bet;
+import com.otsc.backend.entities.User;
 import com.otsc.backend.exceptions.AppException;
 import com.otsc.backend.mappers.BetMapper;
 import com.otsc.backend.repositories.BetRepository;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -113,9 +115,26 @@ public class BetService {
         return betMapper.toBetDtos(betRepository.findAll());
     }
 
-    public BetDto addOpponent(String betId, String opponent) {
-        //TODO: Not final
+    public List<BetDto> getResolvedBets(String user) {
+        if (userRepository.findByLogin(user).isEmpty()) {
+            throw new AppException("No user found", HttpStatus.NOT_FOUND);
+        }
+        UserDto userDto = userService.findByLogin(user);
+        List<BetDto> aggregatedList = new ArrayList<>(getBetsByCreatorId(userDto.getId()));
+        aggregatedList.addAll(getBetsByJudgeId(userDto.getId()));
+        aggregatedList.addAll(getBetsByOpponentId(userDto.getId()));
 
+        List<BetDto> result = new ArrayList<>();
+        for (BetDto betDto : aggregatedList) {
+            if (betDto.getWinner() != null){
+                result.add(betDto);
+            }
+        }
+
+        return result;
+    }
+
+    public BetDto addOpponent(String betId, String opponent) {
         Optional<Bet> bet = betRepository.findBetById(betId);
         if (bet.isEmpty()) {
             throw new AppException("Bet not found", HttpStatus.NOT_FOUND);
