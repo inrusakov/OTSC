@@ -14,4 +14,5 @@ public interface BetRepository extends JpaRepository<Bet, String> {
     Optional<List<Bet>> findBetsByOpponent(String opponent);
 
     Optional<List<Bet>> findBetsByJudge(String judge);
+
 }

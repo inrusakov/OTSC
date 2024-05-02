@@ -46,4 +46,6 @@ public class Bet {
     @Column(name = "winner")
     private String winner;
 
+
+
 }

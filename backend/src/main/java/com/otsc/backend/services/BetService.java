@@ -3,7 +3,6 @@ package com.otsc.backend.services;
 import com.otsc.backend.dtos.BetDto;
 import com.otsc.backend.dtos.UserDto;
 import com.otsc.backend.entities.Bet;
-import com.otsc.backend.entities.User;
 import com.otsc.backend.exceptions.AppException;
 import com.otsc.backend.mappers.BetMapper;
 import com.otsc.backend.repositories.BetRepository;
@@ -35,11 +34,11 @@ public class BetService {
         return betRepository.findById(betId).isPresent();
     }
 
-    public String isUserAllowed(String betId, String login){
-        if(!isBetPresent(betId)){
+    public String isUserAllowed(String betId, String login) {
+        if (!isBetPresent(betId)) {
             return ROLE_NONE;
         }
-        if (userRepository.findByLogin(login).isEmpty()){
+        if (userRepository.findByLogin(login).isEmpty()) {
             return ROLE_NONE;
         }
 
@@ -48,11 +47,11 @@ public class BetService {
         String opponentId = bet.getOpponent();
         String judgeId = bet.getJudge();
         UserDto userDto = userService.findByLogin(login);
-        if (Objects.equals(userDto.getId(), creatorId)){
+        if (Objects.equals(userDto.getId(), creatorId)) {
             return ROLE_CREATOR;
-        } else if (Objects.equals(userDto.getId(), opponentId)){
+        } else if (Objects.equals(userDto.getId(), opponentId)) {
             return ROLE_OPPONENT;
-        } else if (Objects.equals(userDto.getId(), judgeId)){
+        } else if (Objects.equals(userDto.getId(), judgeId)) {
             return ROLE_JUDGE;
         } else {
             return ROLE_NONE;
@@ -86,7 +85,15 @@ public class BetService {
             throw new AppException("No user found", HttpStatus.NOT_FOUND);
         }
 
-        return betMapper.toBetDtos(betRepository.findBetsByCreator(creatorId).orElse(null));
+        List<Bet> betsByCreator = betRepository.findBetsByCreator(creatorId).orElse(new ArrayList<>());
+        List<Bet> result = new ArrayList<>();
+        for (Bet bet : betsByCreator) {
+            if (bet.getWinner() == null) {
+                result.add(bet);
+            }
+        }
+
+        return betMapper.toBetDtos(result);
     }
 
     public List<BetDto> getBetsByOpponentId(String opponentId) {
@@ -96,7 +103,15 @@ public class BetService {
             throw new AppException("No user found", HttpStatus.NOT_FOUND);
         }
 
-        return betMapper.toBetDtos(betRepository.findBetsByOpponent(opponentId).orElse(null));
+        List<Bet> betsByOpponent = betRepository.findBetsByOpponent(opponentId).orElse(new ArrayList<>());
+        List<Bet> result = new ArrayList<>();
+        for (Bet bet : betsByOpponent) {
+            if (bet.getWinner() == null) {
+                result.add(bet);
+            }
+        }
+
+        return betMapper.toBetDtos(result);
     }
 
     public List<BetDto> getBetsByJudgeId(String judgeId) {
@@ -106,7 +121,15 @@ public class BetService {
             throw new AppException("No user found", HttpStatus.NOT_FOUND);
         }
 
-        return betMapper.toBetDtos(betRepository.findBetsByJudge(judgeId).orElse(null));
+        List<Bet> betsByOpponent = betRepository.findBetsByJudge(judgeId).orElse(new ArrayList<>());
+        List<Bet> result = new ArrayList<>();
+        for (Bet bet : betsByOpponent) {
+            if (bet.getWinner() == null) {
+                result.add(bet);
+            }
+        }
+
+        return betMapper.toBetDtos(result);
     }
 
     public List<BetDto> getAllBets() {
@@ -120,18 +143,19 @@ public class BetService {
             throw new AppException("No user found", HttpStatus.NOT_FOUND);
         }
         UserDto userDto = userService.findByLogin(user);
-        List<BetDto> aggregatedList = new ArrayList<>(getBetsByCreatorId(userDto.getId()));
-        aggregatedList.addAll(getBetsByJudgeId(userDto.getId()));
-        aggregatedList.addAll(getBetsByOpponentId(userDto.getId()));
 
-        List<BetDto> result = new ArrayList<>();
-        for (BetDto betDto : aggregatedList) {
-            if (betDto.getWinner() != null){
-                result.add(betDto);
+        List<Bet> aggregatedList = betRepository.findBetsByCreator(userDto.getId()).orElse(new ArrayList<>());
+        aggregatedList.addAll(betRepository.findBetsByOpponent(userDto.getId()).orElse(new ArrayList<>()));
+        aggregatedList.addAll(betRepository.findBetsByJudge(userDto.getId()).orElse(new ArrayList<>()));
+
+        List<Bet> result = new ArrayList<>();
+        for (Bet bet : aggregatedList) {
+            if (bet.getWinner() != null){
+                result.add(bet);
             }
         }
 
-        return result;
+        return betMapper.toBetDtos(result);
     }
 
     public BetDto addOpponent(String betId, String opponent) {
@@ -141,10 +165,10 @@ public class BetService {
         }
         UserDto oppDto = userService.findByLogin(opponent);
         Bet updatedBet = bet.get();
-        if (Objects.equals(updatedBet.getJudge(), oppDto.getId())){
+        if (Objects.equals(updatedBet.getJudge(), oppDto.getId())) {
             throw new AppException("Opponent and judge cannot be same users", HttpStatus.BAD_REQUEST);
         }
-        if (Objects.equals(updatedBet.getCreator(), oppDto.getId())){
+        if (Objects.equals(updatedBet.getCreator(), oppDto.getId())) {
             throw new AppException("Opponent and creator cannot be same users", HttpStatus.BAD_REQUEST);
         }
         if (userRepository.findById(oppDto.getId()).isPresent()) {
@@ -165,10 +189,10 @@ public class BetService {
         }
         UserDto judgeDto = userService.findByLogin(judge);
         Bet updatedBet = bet.get();
-        if (Objects.equals(updatedBet.getOpponent(), judgeDto.getId())){
+        if (Objects.equals(updatedBet.getOpponent(), judgeDto.getId())) {
             throw new AppException("Judge and opponent cannot be same users", HttpStatus.BAD_REQUEST);
         }
-        if (Objects.equals(updatedBet.getCreator(), judgeDto.getId())){
+        if (Objects.equals(updatedBet.getCreator(), judgeDto.getId())) {
             throw new AppException("Judge and creator cannot be same users", HttpStatus.BAD_REQUEST);
         }
         if (userRepository.findById(judgeDto.getId()).isPresent()) {
