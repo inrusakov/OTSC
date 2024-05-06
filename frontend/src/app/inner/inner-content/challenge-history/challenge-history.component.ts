@@ -9,10 +9,13 @@ import { AxiosService } from 'src/app/axios.service';
 export class HistoryComponent {
 
   waiting!: boolean;
+  contestWaiting!: boolean;
 
   historyEmpty!: boolean;
+  contestHistoryEmpty!: boolean;
 
   items!: any;
+  contests!: any;
 
   start!: number;
   end!: number;
@@ -23,8 +26,9 @@ export class HistoryComponent {
   constructor(private axiosService: AxiosService) {
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.waiting = true;
+    this.contestWaiting = true;
     this.page = 1;
     this.pageSize = 8;
     this.maxSize = 8;
@@ -40,7 +44,21 @@ export class HistoryComponent {
           if (this.items.length < 1) {
             this.historyEmpty = true;
           }
-          
+        }).catch(
+          error => {
+          }
+        );
+
+    this.axiosService.request(
+      "GET",
+      "/contestHistory", {})
+      .then(
+        response => {
+          this.contestWaiting = false;
+          this.contests = response.data;
+          if (this.contests.length < 1) {
+            this.contestHistoryEmpty = true;
+          }
         }).catch(
           error => {
           }
