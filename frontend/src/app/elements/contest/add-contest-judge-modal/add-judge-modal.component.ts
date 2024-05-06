@@ -6,63 +6,38 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AxiosService } from 'src/app/axios.service';
 
 @Component({
-  selector: 'ngbd-modal-options',
+  selector: 'add-contest-judge-modal',
   standalone: true,
-  templateUrl: './challenge-modal.component.html',
+  templateUrl: './add-judge-modal.component.html',
   encapsulation: ViewEncapsulation.None,
-  imports: [ReactiveFormsModule, JsonPipe, CommonModule ]
+  imports: [ReactiveFormsModule, JsonPipe, CommonModule]
 })
-export class InnerChallengeModal {
+export class AddContestJudgeModal {
   @Output() onSubmitEvent = new EventEmitter();
+  @Output() onErrorEvent = new EventEmitter();
+  @Input() contestId!: string;
 
   constructor(private formBuilder: FormBuilder, private axiosService: AxiosService, private router: Router) { }
 
   private modalService = inject(NgbModal);
-  waiting: boolean = false;
 
   challengeForm = this.formBuilder.group({
-    title: ['', Validators.required],
-    description: ['']
-  });
-
-  seriesForm = this.formBuilder.group({
-    title: ['', Validators.required],
-    description: ['']
+    login: ['', Validators.required]
   });
 
   onSubmit() {
-    this.waiting = true;
     this.axiosService.request(
       "POST",
-      "/create", {
-      title: this.challengeForm.value.title,
-      description: this.challengeForm.value.description,
-      date: this.getDate(new Date())
+      "/setContestJudge?contestId=" + this.contestId + "&judge=" + this.challengeForm.value.login, {
     })
       .then(
         response => {
-          this.waiting = false;
-          this.router.navigate(['/app']);
-          this.onSubmitEvent.emit();
+          this.onSubmitEvent.emit()
         }).catch(
           error => {
-
+            this.onErrorEvent.emit();
           }
         );
-  }
-
-  padTo2Digits(num: number) {
-    return num.toString().padStart(2, '0');
-  }
-
-  getDate(date: Date){
-    return(
-      [
-        date.getFullYear(),
-        this.padTo2Digits(date.getMonth() + 1),
-        this.padTo2Digits(date.getDate()),
-      ].join('-')
-    )
   }
 
   openLg(content: TemplateRef<any>) {

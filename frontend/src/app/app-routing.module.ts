@@ -7,6 +7,8 @@ import { InnerContentComponent } from './inner/inner-content/inner-content.compo
 import { InnerProfileModal } from './inner/profile/profile.component';
 import { InnerContentChallengeNotFound } from './inner/inner-content/challenge-404/challenge-404.component';
 import { HistoryComponent } from './inner/inner-content/challenge-history/challenge-history.component';
+import { ContestContentComponent } from './inner/contest-content/contest-content.component';
+import { InnerContentContestObserver } from './inner/contest-content/contest-observer/contest-observer.component';
 
 export const routes: Routes = [
   { path: '', component: ContentComponent },
@@ -19,6 +21,10 @@ export const routes: Routes = [
         component: InnerContentComponent,
       },
       {
+        path: 'contest',
+        component: ContestContentComponent,
+      },
+      {
         path: '404',
         component: InnerContentChallengeNotFound,
       },
@@ -29,6 +35,10 @@ export const routes: Routes = [
       {
         path: 'challenge/:id',
         component: InnerContentChallengeObserver,
+      },
+      {
+        path: 'contest/:id',
+        component: InnerContentContestObserver,
       },
       {
         path: 'profile',

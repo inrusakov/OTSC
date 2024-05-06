@@ -1,0 +1,16 @@
+<li>
+  <div class="card" routerLink="/app/challenge/{{value.id}}">
+    <div class="card-body">
+      <div class="event-content">
+        <div class="timeline-date bg-primary text-center rounded float-end">
+          <h3 class="text-white mb-0 fs-17">{{key}}</h3>
+        </div>
+        <div class="timeline-text">
+          <h3 class="fs-17">{{value.title}}</h3>
+          <p *ngIf="!winnerSet" class="mb-0 mt-2 pt-1 text-muted">No winner yet</p>
+          <span *ngIf="winnerSet" class="badge text-bg-success rounded-pill">Won by @{{winner.login}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>

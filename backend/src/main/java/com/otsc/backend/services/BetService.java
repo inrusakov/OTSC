@@ -88,7 +88,7 @@ public class BetService {
         List<Bet> betsByCreator = betRepository.findBetsByCreator(creatorId).orElse(new ArrayList<>());
         List<Bet> result = new ArrayList<>();
         for (Bet bet : betsByCreator) {
-            if (bet.getWinner() == null) {
+            if (bet.getWinner() == null && !bet.isInContest()) {
                 result.add(bet);
             }
         }
@@ -106,7 +106,7 @@ public class BetService {
         List<Bet> betsByOpponent = betRepository.findBetsByOpponent(opponentId).orElse(new ArrayList<>());
         List<Bet> result = new ArrayList<>();
         for (Bet bet : betsByOpponent) {
-            if (bet.getWinner() == null) {
+            if (bet.getWinner() == null && !bet.isInContest()) {
                 result.add(bet);
             }
         }
@@ -123,8 +123,8 @@ public class BetService {
 
         List<Bet> betsByOpponent = betRepository.findBetsByJudge(judgeId).orElse(new ArrayList<>());
         List<Bet> result = new ArrayList<>();
-        for (Bet bet : betsByOpponent) {
-            if (bet.getWinner() == null) {
+        for (Bet bet : betsByOpponent ) {
+            if (bet.getWinner() == null && !bet.isInContest()) {
                 result.add(bet);
             }
         }
@@ -150,7 +150,7 @@ public class BetService {
 
         List<Bet> result = new ArrayList<>();
         for (Bet bet : aggregatedList) {
-            if (bet.getWinner() != null){
+            if (bet.getWinner() != null && !bet.isInContest()){
                 result.add(bet);
             }
         }

@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -29,7 +30,7 @@ public class MessageService {
             throw new AppException("Bet not found", HttpStatus.BAD_REQUEST);
         }
 
-        List<Message> messages = messageRepository.findAllByBetIdOrderByIdAsc(betId);
+        List<Message> messages = messageRepository.findAllByBetIdOrderByTimeAsc(betId);
         messages = updateAvatars(messages);
         return messageMapper.messagesToMessageDtos(messages);
     }
@@ -37,6 +38,7 @@ public class MessageService {
     public MessageDto addMessage(MessageDto messageDto, String sender){
         userService.findByLogin(sender);
         messageDto.setName(sender);
+        messageDto.setTime(LocalDateTime.now());
         if (!(messageDto.getAlignment().equals("right") || messageDto.getAlignment().equals("left"))){
             throw new AppException("Wrong alignment", HttpStatus.BAD_REQUEST);
         }

@@ -22,22 +22,30 @@ import { AxiosService } from './axios.service';
 import { InnerHeaderComponent } from './inner/header/inner-header.component';
 import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { InnerContentChallenge } from './inner/inner-content/challenge-table-content/challenge.component';
-import { InnerChallengeModal } from './elements/challenge-create-modal/challenge-modal.component';
+import { InnerChallengeModal } from './elements/bet/challenge-create-modal/challenge-modal.component';
 import { InnerContentChallengeObserver } from './inner/inner-content/challenge-observer/challenge-observer.component';
 import { InnerProfileModal } from './inner/profile/profile.component';
 import { InnerContentChallengeNotFound } from './inner/inner-content/challenge-404/challenge-404.component';
 import { NgbdAlertSelfclosing } from './elements/self-closing-alert/alert.component';
 import { ProfileParagraph } from './elements/profile-paragraph/profile-p.component';
 import { ImageView } from './elements/image-view/image-view.component';
-import { Chat } from './elements/chat/chat.component';
-import { ChatMessage } from './elements/chat-message/message.component';
+import { Chat } from './elements/bet/chat/chat.component';
+import { ChatMessage } from './elements/bet/chat-message/message.component';
 import { MessageModal } from './elements/message-modal/message-modal.component';
-import { AddOpponentModal } from './elements/add-opponent-modal/add-opp-modal.component';
-import { AddJudgeModal } from './elements/add-judge-modal/add-judge-modal.component';
-import { ResolveChallengeModal } from './elements/resolve-challenge-modal/resolve-modal.component';
+import { AddOpponentModal } from './elements/bet/add-opponent-modal/add-opp-modal.component';
+import { AddJudgeModal } from './elements/bet/add-judge-modal/add-judge-modal.component';
+import { ResolveChallengeModal } from './elements/bet/resolve-challenge-modal/resolve-modal.component';
 import { CopyButton } from './elements/copy-button/copy-button.component';
 import { AvatarComponent } from './elements/avatar/avatar.component';
 import { HistoryComponent } from './inner/inner-content/challenge-history/challenge-history.component';
+import { ContestContentComponent } from './inner/contest-content/contest-content.component';
+import { InnerContestModal } from './elements/contest/contest-create-modal/contest-modal.component';
+import { InnerContestContent } from './inner/contest-content/contest-table-content/contest.component';
+import { InnerContentContestObserver } from './inner/contest-content/contest-observer/contest-observer.component';
+import { BetInListComponent } from './elements/contest/bet-in-contest-list/bet-in-list.component';
+import { AddBetModal } from './elements/contest/add-bet-modal/add-bet-modal.component';
+import { AddContestJudgeModal } from './elements/contest/add-contest-judge-modal/add-judge-modal.component';
+import { AddContestOpponentModal } from './elements/contest/add-contest-opp-modal/add-opp-modal.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +67,9 @@ import { HistoryComponent } from './inner/inner-content/challenge-history/challe
     Chat,
     ChatMessage,
     AvatarComponent,
-    HistoryComponent
+    HistoryComponent,
+    ContestContentComponent,
+    InnerContentContestObserver
   ],
   imports: [
     BrowserModule,
@@ -75,7 +85,13 @@ import { HistoryComponent } from './inner/inner-content/challenge-history/challe
     AddOpponentModal,
     AddJudgeModal,
     ResolveChallengeModal,
-    CopyButton
+    CopyButton,
+    InnerContestModal,
+    InnerContestContent,
+    BetInListComponent,
+    AddBetModal,
+    AddContestJudgeModal,
+    AddContestOpponentModal
   ],
   providers: [AxiosService, provideRouter(routes)],
   bootstrap: [AppComponent]

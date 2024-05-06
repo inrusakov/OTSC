@@ -33,20 +33,6 @@ export class MessageModal {
     text: ['']
   });
 
-  padTo2Digits(num: number) {
-    return num.toString().padStart(2, '0');
-  }
-
-  getDate(date: Date) {
-    return (
-      [
-        date.getFullYear(),
-        this.padTo2Digits(date.getMonth() + 1),
-        this.padTo2Digits(date.getDate()),
-      ].join('-')
-    )
-  }
-
   openLg(content: TemplateRef<any>) {
     this.modalService.open(content, { size: 'lg' });
   }
@@ -95,8 +81,7 @@ export class MessageModal {
                   avatar: 'link',
                   text: this.messageForm.value.text,
                   imageInMessage: true,
-                  imagePath: this.uploadedFile,
-                  time: this.getDate(new Date)
+                  imagePath: this.uploadedFile
                 })
                 .then(
                   response => {
@@ -129,8 +114,7 @@ export class MessageModal {
           avatar: 'link',
           text: this.messageForm.value.text,
           imageInMessage: false,
-          imagePath: 'null',
-          time: this.getDate(new Date)
+          imagePath: 'null'
         })
         .then(
           response => {

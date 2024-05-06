@@ -1,4 +1,4 @@
-<create-bet-modal (onSubmitEvent)="ngOnInit()"></create-bet-modal>
+<create-contest-modal (onSubmitEvent)="ngOnInit()"></create-contest-modal>
 
 <div class="spinner-border" role="status" *ngIf="waitingCreated">
   <span class="visually-hidden">Loading...</span>
@@ -13,8 +13,8 @@
   </div>
 
   <div *ngFor="let item of challengesCreated.slice(start, end); trackBy:identify" class="row">
-    <inner-challenge routerLink="/app/challenge/{{item.id}}" class="col border rounded-3" [id]="item.id"
-      [title]="item.title" [date]="item.date"></inner-challenge>
+    <inner-contest routerLink="/app/contest/{{item.id}}" class="col border rounded-3" [id]="item.id"
+      [title]="item.title" [date]="item.date"></inner-contest>
   </div>
 
   <div class="text-center" *ngIf="createdEmpty">
@@ -34,8 +34,8 @@
     </ngb-pagination>
   </div>
   <div *ngFor="let item of challengesOpponent" class="row">
-    <inner-challenge routerLink="/app/challenge/{{item.id}}" class="col border rounded-3" [id]="item.id"
-      [title]="item.title" [date]="item.date"></inner-challenge>
+    <inner-contest routerLink="/app/contest/{{item.id}}" class="col border rounded-3" [id]="item.id"
+      [title]="item.title" [date]="item.date"></inner-contest>
   </div>
   <div class="text-center" *ngIf="opponentEmpty">
     Nobody invited you as an opponent...
@@ -54,8 +54,8 @@
     </ngb-pagination>
   </div>
   <div *ngFor="let item of challengesJudge" class="row">
-    <inner-challenge routerLink="/app/challenge/{{item.id}}" class="col border rounded-3" [id]="item.id"
-      [title]="item.title" [date]="item.date"></inner-challenge>
+    <inner-contest routerLink="/app/contest/{{item.id}}" class="col border rounded-3" [id]="item.id"
+      [title]="item.title" [date]="item.date"></inner-contest>
   </div>
   <div class="text-center" *ngIf="judgeEmpty">
     Nobody invited you as a judge...

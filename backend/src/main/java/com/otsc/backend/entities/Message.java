@@ -12,6 +12,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,7 +37,7 @@ public class Message {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "text", nullable = false)
+    @Column(name = "text", nullable = false, columnDefinition = "TEXT")
     private String text;
 
     @Column(name = "image_in_message", nullable = false)
@@ -46,6 +47,6 @@ public class Message {
     private String imagePath;
 
     @Column(name = "time", nullable = false)
-    private String time;
+    private LocalDateTime time;
 
 }

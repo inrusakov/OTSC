@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MessageRepository extends JpaRepository<Message, String> {
-    List<Message> findAllByBetIdOrderByIdAsc(String id);
+    List<Message> findAllByBetIdOrderByTimeAsc(String id);
 }

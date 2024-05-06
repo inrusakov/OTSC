@@ -1,0 +1,68 @@
+<div *ngIf="unlocked && !finished && creator" class="d-flex gap-2 justify-content-between">
+  <button class="m-2 flex-fill btn btn-success" type="button" mdbRipple (click)="openLg(single)">
+    Add Bet
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="5" x2="12" y2="19"></line>
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+    </svg>
+  </button>
+</div>
+
+<div *ngIf="!unlocked && !finished && creator" class="container text-center">
+  <button class="row m-2 flex-fill btn btn-success" type="button" disabled="true">
+    Add Bet
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+    </svg>
+  </button>
+
+  <div class="row m-2 flex-fill">
+    <small>*Set judge and opponent to unlock</small>
+  </div>
+</div>
+
+<div *ngIf="finished" class="container text-center">
+  <button class="row m-2 flex-fill btn btn-success" type="button" disabled="true">
+    Bet limit reached!
+  </button>
+</div>
+
+<div *ngIf="!finished && !creator" class="container text-center">
+  <button class="row m-2 flex-fill btn btn-success" type="button" disabled="true">
+    You have to be creator to add bet
+  </button>
+</div>
+
+<ng-template #single let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Create Bet</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="challengeForm" (ngSubmit)="onSubmit()">
+
+      <div class="mb-3">
+        <label for="title" class="form-label">Title: </label>
+        <input id="title" type="text" class="form-control" formControlName="title" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description: </label>
+        <textarea class="form-control" rows="3" id="description" type="text" formControlName="description"
+          required></textarea>
+      </div>
+
+      <div class="modal-footer" *ngIf="!waiting">
+        <button type="submit" [disabled]="!challengeForm.valid" class="btn btn-success"
+          (click)="modal.close('Close click')">Submit</button>
+      </div>
+
+      <div class="spinner-border" role="status" *ngIf="waiting">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </form>
+  </div>
+</ng-template>

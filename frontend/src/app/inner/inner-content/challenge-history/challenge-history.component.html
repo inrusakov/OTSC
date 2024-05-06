@@ -16,7 +16,7 @@
 
   <div class="my-2 p-3 bg-body rounded shadow-sm" *ngIf="!waiting">
     <div class="d-flex gap-2 justify-content-between">
-      <h5 class="m-2 flex-grow-1 border-bottom pb-2 mb-0">History:</h5>
+      <h5 class="m-2 flex-grow-1 border-bottom pb-2 mb-0">Bets History:</h5>
       <ngb-pagination [(page)]="page" [pageSize]="pageSize" [maxSize]="maxSize"
       [collectionSize]="items.length" (pageChange)='updateStartAndEnd()'
       *ngIf="items.length > pageSize">
@@ -24,9 +24,30 @@
     </div>
     <div *ngFor="let item of items" class="row">
       <inner-challenge routerLink="/app/challenge/{{item.id}}" class="col border rounded-3" [id]="item.id"
-        [title]="item.title" [date]="item.date"></inner-challenge>
+        [title]="item.title" [date]="item.date" [winner]="item.winner"></inner-challenge>
     </div>
     <div class="text-center" *ngIf="historyEmpty">
+      History empty...
+    </div>
+  </div>
+
+  <div class="spinner-border" role="status" *ngIf="contestWaiting">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+
+  <div class="my-2 p-3 bg-body rounded shadow-sm" *ngIf="!contestWaiting">
+    <div class="d-flex gap-2 justify-content-between">
+      <h5 class="m-2 flex-grow-1 border-bottom pb-2 mb-0">Contests History:</h5>
+      <ngb-pagination [(page)]="page" [pageSize]="pageSize" [maxSize]="maxSize"
+      [collectionSize]="contests.length" (pageChange)='updateStartAndEnd()'
+      *ngIf="contests.length > pageSize">
+      </ngb-pagination>
+    </div>
+    <div *ngFor="let item of contests" class="row">
+      <inner-contest routerLink="/app/contest/{{item.id}}" class="col border rounded-3" [id]="item.id"
+        [title]="item.title" [date]="item.date" [winner]="item.winner"></inner-contest>
+    </div>
+    <div class="text-center" *ngIf="contestHistoryEmpty">
       History empty...
     </div>
   </div>

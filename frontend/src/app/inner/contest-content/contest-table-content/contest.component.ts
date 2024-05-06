@@ -3,16 +3,16 @@ import { Component, Input } from '@angular/core';
 import { AxiosService } from 'src/app/axios.service';
 
 @Component({
-  selector: 'inner-challenge',
-  templateUrl: './challenge.component.html',
+  selector: 'inner-contest',
+  templateUrl: './contest.component.html',
   standalone: true,
-  styleUrls: ['./challenge.component.css'],
-  imports: [CommonModule]
+  styleUrls: ['./contest.component.css'],
+  imports:[CommonModule]
 })
-export class InnerContentChallenge {
+export class InnerContestContent {
   @Input() id!: string;
   @Input() title!: string;
-  @Input() date!: any;
+  @Input() date!: any; 
   @Input() winner!: any;
   winnerProfile!: any;
   color!: string;
@@ -20,7 +20,7 @@ export class InnerContentChallenge {
   constructor(private axiosService: AxiosService) {
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void{
     this.color = this.randomColor();
     if(this.winner){
       this.getWinnerProfile();
@@ -35,10 +35,6 @@ export class InnerContentChallenge {
     }
     return '#' + result;
   };
-
-  getDate(date: any) {
-    return date.join('-')
-  }
 
   getWinnerProfile(){
     this.axiosService.request(

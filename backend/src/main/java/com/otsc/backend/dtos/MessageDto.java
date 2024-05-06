@@ -1,9 +1,12 @@
 package com.otsc.backend.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -18,6 +21,7 @@ public class MessageDto {
     private String text;
     private boolean imageInMessage;
     private String imagePath;
-    private String time;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime time;
 
 }

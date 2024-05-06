@@ -10,7 +10,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.UuidGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Timestamp;
@@ -22,23 +21,14 @@ import java.time.LocalDateTime;
 @Builder
 @Data
 @Entity
-@Table(name = "app_bet")
-public class Bet {
+@Table(name = "app_contests")
+public class Contest {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @Column(name = "creator")
     private String creator;
-
-    @Column(name = "title", columnDefinition = "TEXT")
-    private String title;
-
-    @Column(name = "description", columnDefinition = "TEXT")
-    private String description;
-
-    @Column(name = "date", columnDefinition = "TIMESTAMP")
-    private LocalDateTime date;
 
     @Column(name = "opponent")
     private String opponent;
@@ -49,10 +39,16 @@ public class Bet {
     @Column(name = "winner")
     private String winner;
 
-    @Column(name = "is_in_contest")
-    private boolean inContest;
+    @Column(name = "title", columnDefinition = "TEXT")
+    private String title;
 
-    @Column(name = "contest")
-    private String contest;
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
+
+    @Column(name = "date", columnDefinition = "TIMESTAMP")
+    private LocalDateTime date;
+
+    @Column(name = "size")
+    private Integer size;
 
 }
