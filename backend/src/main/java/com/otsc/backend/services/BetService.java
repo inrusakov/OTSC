@@ -38,9 +38,7 @@ public class BetService {
         if (!isBetPresent(betId)) {
             return ROLE_NONE;
         }
-        if (userRepository.findByLogin(login).isEmpty()) {
-            return ROLE_NONE;
-        }
+        userService.findByLogin(login);
 
         BetDto bet = getBetById(betId);
         String creatorId = bet.getCreator();
@@ -86,14 +84,7 @@ public class BetService {
         }
 
         List<Bet> betsByCreator = betRepository.findBetsByCreator(creatorId).orElse(new ArrayList<>());
-        List<Bet> result = new ArrayList<>();
-        for (Bet bet : betsByCreator) {
-            if (bet.getWinner() == null && !bet.isInContest()) {
-                result.add(bet);
-            }
-        }
-
-        return betMapper.toBetDtos(result);
+        return getActiveBets(betsByCreator);
     }
 
     public List<BetDto> getBetsByOpponentId(String opponentId) {
@@ -104,14 +95,7 @@ public class BetService {
         }
 
         List<Bet> betsByOpponent = betRepository.findBetsByOpponent(opponentId).orElse(new ArrayList<>());
-        List<Bet> result = new ArrayList<>();
-        for (Bet bet : betsByOpponent) {
-            if (bet.getWinner() == null && !bet.isInContest()) {
-                result.add(bet);
-            }
-        }
-
-        return betMapper.toBetDtos(result);
+        return getActiveBets(betsByOpponent);
     }
 
     public List<BetDto> getBetsByJudgeId(String judgeId) {
@@ -122,8 +106,12 @@ public class BetService {
         }
 
         List<Bet> betsByOpponent = betRepository.findBetsByJudge(judgeId).orElse(new ArrayList<>());
+        return getActiveBets(betsByOpponent);
+    }
+
+    public List<BetDto> getActiveBets(List<Bet> betsByCreator) {
         List<Bet> result = new ArrayList<>();
-        for (Bet bet : betsByOpponent ) {
+        for (Bet bet : betsByCreator) {
             if (bet.getWinner() == null && !bet.isInContest()) {
                 result.add(bet);
             }
@@ -150,7 +138,7 @@ public class BetService {
 
         List<Bet> result = new ArrayList<>();
         for (Bet bet : aggregatedList) {
-            if (bet.getWinner() != null && !bet.isInContest()){
+            if (bet.getWinner() != null && !bet.isInContest()) {
                 result.add(bet);
             }
         }
