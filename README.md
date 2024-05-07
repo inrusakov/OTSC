@@ -1,3 +1,3 @@
 # On the Spot Challenge
 
-Bachelors degree course work
+Bachelors thesis 
