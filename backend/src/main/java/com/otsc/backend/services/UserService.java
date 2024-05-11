@@ -96,7 +96,7 @@ public class UserService {
         if (!Objects.equals(request.getLogin(), sender)){
             throw new AppException("Sender is not equal to account owner", HttpStatus.BAD_REQUEST);
         }
-        if (!Objects.equals(request.getOldPass(), request.getNewPass())){
+        if (Objects.equals(request.getOldPass(), request.getNewPass())){
             throw new AppException("Old pass must be not equal to new one", HttpStatus.BAD_REQUEST);
         }
         if (!passwordEncoder.matches(CharBuffer.wrap(request.getOldPass()), user.getPassword())) {
