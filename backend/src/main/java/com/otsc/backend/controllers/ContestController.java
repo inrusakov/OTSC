@@ -27,7 +27,6 @@ public class ContestController {
 
     @PostMapping("/createContest")
     public ResponseEntity<ContestDto> create(@RequestBody @Valid ContestDto contestDto) {
-        //TODO: Not final
 
         UserDto principal = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDto user = userService.findByLogin(principal.getLogin());

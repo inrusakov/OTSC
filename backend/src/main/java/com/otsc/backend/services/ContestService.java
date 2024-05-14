@@ -87,7 +87,7 @@ public class ContestService {
         contestDto.setBetMap(contestBets);
         contestDto.setCurrentSize(contestBets.size());
 
-        if(Objects.equals(contestDto.getSize(), contestDto.getCurrentSize())){
+        if(Objects.equals(contestDto.getSize(), contestDto.getCurrentSize()) && contestDto.getWinner() == null){
             int creatorWon = 0;
             int opponentWon = 0;
             for (BetDto value : contestDto.getBetMap().values()) {
