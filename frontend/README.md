@@ -36,35 +36,35 @@ The "contest-content" module is responsible for displaying contests. Inside it t
 The "header" component is responsible for the navigation bar at the top of the application.
 The "inner-app" component is the parent component for all other components, all other components are based on its html template, the transition between them is made thanks to the "routing" service.
 The "inner-content" component contains components responsible for:
-•	Displaying the page of an undiscovered bets or contests.
-•	The history page, where all completed bets and contests are located.
-•	The individual bet display page.
-•	The bet list element on the bet page.
-•	The profile settings page.
+*	Displaying the page of an undiscovered bets or contests.
+*	The history page, where all completed bets and contests are located.
+*	The individual bet display page.
+*	The bet list element on the bet page.
+*	The profile settings page.
 
 ### Elements module
 
 The "elements" module is responsible for displaying individual elements that can be reused in parent components. It includes such components as:
-•	Display avatar in "header".
-•	Module with components on the bet page:
-    o	A modal window with a form for adding a judge.
-    o	A modal window with the form for adding an opponent
-    o	A modal window with a form for creating a contest.
-    o	Chat window on the bet page.
-    o	Message in chat
-    o	Modal window with choosing the winner of the bet.
-•	Button to exit the application.
-•	Module with contest elements:
-    o	A modal window with a form to add a bet to the contest.
-    o	A modal window with the form of adding a judge to the contest.
-    o	Modal window with the form of adding an opponent to the contest
-    o	List of bets included in the contest
-    o	Modal window with the form of creating a contest.
-•	Button for copying the current page address to the clipboard.
-•	Picture display.
-•	Modal window with the form of adding a message to the chat.
-•	Profile display in the information about a bets or contests.
-•	Pop-up alert that closes after 10 seconds.
+*	Display avatar in "header".
+*	Module with components on the bet page:
+    *	A modal window with a form for adding a judge.
+    *	A modal window with the form for adding an opponent
+    *	A modal window with a form for creating a contest.
+    *	Chat window on the bet page.
+    *	Message in chat
+    *	Modal window with choosing the winner of the bet.
+*	Button to exit the application.
+*	Module with contest elements:
+    *	A modal window with a form to add a bet to the contest.
+    *	A modal window with the form of adding a judge to the contest.
+    *	Modal window with the form of adding an opponent to the contest
+    *	List of bets included in the contest
+    *	Modal window with the form of creating a contest.
+*	Button for copying the current page address to the clipboard.
+*	Picture display.
+*	Modal window with the form of adding a message to the chat.
+*	Profile display in the information about a bets or contests.
+*	Pop-up alert that closes after 10 seconds.
 
 ### App-routing Component 
 
